@@ -8,11 +8,18 @@
 #ifndef SPACESHIP_H_
 #define SPACESHIP_H_
 
+#include <SFML/Graphics.hpp>
+
 class SpaceShip {
 
 public:
 	SpaceShip();
+	SpaceShip(sf::RenderWindow&);
 	virtual ~SpaceShip();
+
+private:
+	int x,y;
+
 };
 
 #endif /* SPACESHIP_H_ */
