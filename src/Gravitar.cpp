@@ -2,10 +2,10 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200,200), "Hello World");
+    sf::RenderWindow window(sf::VideoMode(200,200), "Gravitar");
     sf::CircleShape shape(100.f);
     shape.setPointCount(128);
-    shape.setFillColor(sf::Color::Green);
+    shape.setFillColor(sf::Color::Magenta);
 
     while (window.isOpen())
     {

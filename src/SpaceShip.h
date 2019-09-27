@@ -9,6 +9,7 @@
 #define SPACESHIP_H_
 
 class SpaceShip {
+
 public:
 	SpaceShip();
 	virtual ~SpaceShip();
