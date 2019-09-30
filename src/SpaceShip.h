@@ -1,10 +1,3 @@
-/*
- * SpaceShip.h
- *
- *  Created on: 27 set 2019
- *      Author: loren
- */
-
 #ifndef SPACESHIP_H_
 #define SPACESHIP_H_
 
@@ -14,12 +7,13 @@ class SpaceShip {
 
 public:
 	SpaceShip();
-	SpaceShip(sf::RenderWindow&);
 	virtual ~SpaceShip();
-
+	void onEvent(sf::Event& event);
+	void draw(sf::RenderWindow& w);
 private:
 	int x,y;
+	sf::ConvexShape ship;
 
 };
 
-#endif /* SPACESHIP_H_ */
+#endif

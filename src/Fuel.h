@@ -1,17 +1,17 @@
-/*
- * Fuel.h
- *
- *  Created on: 27 set 2019
- *      Author: loren
- */
-
 #ifndef FUEL_H_
 #define FUEL_H_
 
+#include <SFML/Graphics.hpp>
+
 class Fuel {
 public:
-	Fuel();
+	Fuel(int a);
 	virtual ~Fuel();
+	void draw(sf::RenderWindow& w);
+
+private:
+	sf::ConvexShape benza;
+	int value, powerup;
 };
 
-#endif /* FUEL_H_ */
+#endif

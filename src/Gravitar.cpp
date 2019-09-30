@@ -1,11 +1,10 @@
 #include <SFML/Graphics.hpp>
-
+#include "SpaceShip.h"
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200,200), "Gravitar");
-    sf::CircleShape shape(100.f);
-    shape.setPointCount(128);
-    shape.setFillColor(sf::Color::Magenta);
+    sf::RenderWindow window(sf::VideoMode(1366,768), "Gravitar");
+    window.setFramerateLimit(60);
+    SpaceShip sp;
 
     while (window.isOpen())
     {
@@ -17,7 +16,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        sp.draw(window);
         window.display();
     }
 
