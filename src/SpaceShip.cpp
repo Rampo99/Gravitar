@@ -33,7 +33,7 @@ Spaceship::Spaceship()
 	ship.setPoint(14, Vector2f(28, 0));
 	ship.setPoint(15, Vector2f(14, 7));
 	ship.setOrigin(28, 28);
-	ship.setPosition(100, 100);
+	ship.setPosition(800, 450);
 	move_left = move_up = move_right = move_down = false;
 	speed = 400;
 }
