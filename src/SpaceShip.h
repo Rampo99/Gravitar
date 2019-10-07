@@ -1,19 +1,29 @@
-#ifndef SPACESHIP_H_
-#define SPACESHIP_H_
-
 #include <SFML/Graphics.hpp>
+#include <list>
 
-class SpaceShip {
+
+using namespace std;
+using namespace sf;
+
+
+#ifndef SPACESHIP_H
+#define SPACESHIP_H
+
+
+class Spaceship {
+
+private:
+	ConvexShape ship;
+	bool move_left, move_up, move_right, move_down;
+	double speed;
+	Clock clock;
 
 public:
-	SpaceShip();
-	virtual ~SpaceShip();
-	void onEvent(sf::Event& event);
-	void draw(sf::RenderWindow& w);
-private:
-	int x,y;
-	sf::ConvexShape ship;
-
+	Spaceship();
+	void direction(Event event);
+	void move();
+	void draw(RenderWindow& window);
 };
 
-#endif
+#endif  // SPACESHIP_H
+
