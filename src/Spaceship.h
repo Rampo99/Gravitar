@@ -14,7 +14,7 @@ class Spaceship {
 
 private:
 	ConvexShape ship;
-	bool move_left, move_up, move_right, move_down;
+	bool move_left, move_up, move_right, move_down, shooting;
 	double speed, ratio;
 	Clock clock_move, clock_canshoot;
 	Time for_shooting;
@@ -22,7 +22,8 @@ private:
 public:
 	Spaceship();
 	void direction(Event event);
-	void shoot(Event event, list<Bullet*>& bullets);
+	void ifShooting(Event event);
+	void shoot(list<Bullet*>& bullets);
 	void move();
 	void draw(RenderWindow& window);
 };

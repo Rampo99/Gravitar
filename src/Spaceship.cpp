@@ -35,7 +35,7 @@ Spaceship::Spaceship()
 	ship.setPoint(15, Vector2f(14, 7));
 	ship.setOrigin(28, 28);
 	ship.setPosition(800, 450);
-	move_left = move_up = move_right = move_down = false;
+	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 400;
 	ratio = 1.0 / 3.0;
 	for_shooting = seconds(ratio);
@@ -103,11 +103,20 @@ void Spaceship::direction(Event event)
 }
 
 
-void Spaceship::shoot(Event event, list<Bullet*>& bullets)
+void Spaceship::ifShooting(Event event)
+{
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::L)
+		shooting = true;
+	if (event.type == Event::KeyReleased && event.key.code == Keyboard::L)
+		shooting = false;
+}
+
+
+void Spaceship::shoot(list<Bullet*>& bullets)
 {
 	double x = ship.getPosition().x, y = ship.getPosition().y;
 	for_shooting += clock_canshoot.restart();
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::L && for_shooting.asSeconds() >= ratio) {
+	if (shooting && for_shooting.asSeconds() >= ratio) {
 		Bullet **tmp = new Bullet*;
 		if (move_left)
 			x -= 28;

@@ -20,8 +20,10 @@ private:
 public:
 	Bullet(double x, double y, bool left, bool up, bool right, bool down);
 	void move();
+	bool isAlive(RenderWindow& window);
 	void draw(RenderWindow& window);
 };
 
 
 #endif /* BULLET_H_ */
+
