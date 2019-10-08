@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <list>
 #include <math.h>
-#include <iostream>
+#include <list>
 #include "Spaceship.h"
 
 
@@ -16,6 +15,8 @@ Spaceship::Spaceship()
 {
 	ship = ConvexShape(16);
 	ship.setFillColor(Color::Green);
+	ship.setOutlineColor(Color::Magenta);
+	ship.setOutlineThickness(2);
 	ship.setPoint(0, Vector2f(0, 0));
 	ship.setPoint(1, Vector2f(7, 14));
 	ship.setPoint(2, Vector2f(0, 28));
@@ -36,7 +37,10 @@ Spaceship::Spaceship()
 	ship.setPosition(800, 450);
 	move_left = move_up = move_right = move_down = false;
 	speed = 400;
+	ratio = 1.0 / 3.0;
+	for_shooting = seconds(ratio);
 }
+
 
 void Spaceship::direction(Event event)
 {
@@ -98,9 +102,34 @@ void Spaceship::direction(Event event)
 	}
 }
 
+
+void Spaceship::shoot(Event event, list<Bullet*>& bullets)
+{
+	double x = ship.getPosition().x, y = ship.getPosition().y;
+	for_shooting += clock_canshoot.restart();
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::L && for_shooting.asSeconds() >= ratio) {
+		Bullet **tmp = new Bullet*;
+		if (move_left)
+			x -= 28;
+		if (move_up)
+			y -= 28;
+		if (move_right)
+			x += 28;
+		if (move_down)
+			y += 28;
+		if (!(move_left || move_up || move_right || move_down))
+			*tmp = new Bullet(x, y + 28, false, false, false, true);
+		else {
+			*tmp = new Bullet(x, y, move_left, move_up, move_right, move_down);
+		}
+		bullets.push_front(*tmp);
+		for_shooting = clock_canshoot.restart();
+	}
+}
+
 void Spaceship::move()
 {
-	Time elapsed = clock.restart();
+	Time elapsed = clock_move.restart();
 	double coeff = 1;
 	if ((move_up || move_down) && (move_left || move_right))
 		coeff = sin(45 * PI / 180);
@@ -113,6 +142,7 @@ void Spaceship::move()
 	if (move_down)
 		ship.setPosition(ship.getPosition().x, ship.getPosition().y + elapsed.asSeconds() * speed * coeff);
 }
+
 
 void  Spaceship::draw(RenderWindow& window)
 {
