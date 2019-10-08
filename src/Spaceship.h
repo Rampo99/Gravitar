@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <list>
+#include "Bullet.h"
 
 
 using namespace std;
@@ -15,15 +15,18 @@ class Spaceship {
 private:
 	ConvexShape ship;
 	bool move_left, move_up, move_right, move_down;
-	double speed;
-	Clock clock;
+	double speed, ratio;
+	Clock clock_move, clock_canshoot;
+	Time for_shooting;
 
 public:
 	Spaceship();
 	void direction(Event event);
+	void shoot(Event event, list<Bullet*>& bullets);
 	void move();
 	void draw(RenderWindow& window);
 };
+
 
 #endif  // SPACESHIP_H
 
