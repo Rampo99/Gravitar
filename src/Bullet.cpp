@@ -41,6 +41,15 @@ void Bullet::move()
 }
 
 
+bool Bullet::isAlive(RenderWindow& window)
+{
+	return bullet.getPosition().x >= 0 - 5 &&
+			bullet.getPosition().x <= window.getSize().x + 5 &&
+			bullet.getPosition().y >= 0 - 5 &&
+			bullet.getPosition().y <= window.getSize().y + 5;
+}
+
+
 void Bullet::draw(RenderWindow& window)
 {
 	window.draw(bullet);
