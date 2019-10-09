@@ -12,7 +12,9 @@ using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(1600, 900), "Gravitar");
+	ContextSettings settings;
+	settings.antialiasingLevel = 16;
+	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
 	list<Bullet*> bullets;
