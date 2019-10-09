@@ -25,5 +25,5 @@ public:
 };
 
 
-#endif /* BULLET_H_ */
+#endif  // BULLET_H
 

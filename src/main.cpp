@@ -12,7 +12,7 @@ using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(1600.0, 900.0), "Gravitar");
+	RenderWindow window(VideoMode(1600, 900), "Gravitar");
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
 	list<Bullet*> bullets;
@@ -25,8 +25,8 @@ int main()
 			ship.direction(event);
 			ship.ifShooting(event);
 		}
-		ship.shoot(bullets);
 		ship.move();
+		ship.shoot(bullets);
 		window.clear();
 		ship.draw(window);
 		for(it = bullets.begin(); it != bullets.end(); ) {
