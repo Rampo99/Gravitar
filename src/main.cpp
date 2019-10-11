@@ -5,28 +5,26 @@ using namespace std;
 using namespace sf;
 
 
-int main()
-{
+int main(){
 	std::vector<Screen*> Screens;
 	int screen = 0;
 
-		//Window creation
-		sf::RenderWindow App(sf::VideoMode(640, 480, 32), "SFML Demo 3");
 
-		//Mouse cursor no more visible
-		App.setMouseCursorVisible(false);
+	ContextSettings settings;
+	settings.antialiasingLevel = 8;
+	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
+	window.setKeyRepeatEnabled(false);
 
-		//Screens preparations
-		Menu menu;
-		Screens.push_back(&menu);
-		Game game;
-		Screens.push_back(&game);
+	Menu menu;
+	Screens.push_back(&menu);
+	Game game;
+	Screens.push_back(&game);
 
-		//Main loop
-		while (screen >= 0)
-		{
-			screen = Screens[screen]->Run(App);
-		}
+	//Main loop
+	while (screen >= 0)
+	{
+		screen = Screens[screen]->Run(window);
+	}
 
 }
 

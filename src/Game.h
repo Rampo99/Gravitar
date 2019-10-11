@@ -1,16 +1,20 @@
-/*
- * Game.h
- *
- *  Created on: 11 ott 2019
- *      Author: loren
- */
+#include "Screen.h"
+#include "Spaceship.h"
+#include "Bullet.h"
+#include <list>
+#include <SFML/Graphics.hpp>
 
 #ifndef GAME_H_
 #define GAME_H_
 
-class Game {
+class Game : public Screen{
 public:
 	Game();
+	virtual int Run(sf::RenderWindow &App);
+private:
+	Spaceship ship;
+	list<Bullet*> bullets;
+	list<Bullet*>::iterator it;
 };
 
-#endif /* GAME_H_ */
+#endif

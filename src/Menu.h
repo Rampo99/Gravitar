@@ -1,11 +1,20 @@
+#include <iostream>
+#include "Screen.h"
+
+#include <SFML/Graphics.hpp>
 
 #ifndef MENU_H_
 #define MENU_H_
 
-class Menu {
+class Menu : public Screen{
 public:
-	Menu();
-};
+	Menu(void);
+	virtual int Run(sf::RenderWindow &App);
+private:
+	int a;
+	int b;
+	bool gioco;
 
+};
 
 #endif

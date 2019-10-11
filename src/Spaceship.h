@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-
+#include <list>
 
 using namespace std;
 using namespace sf;

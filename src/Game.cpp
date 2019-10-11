@@ -1,21 +1,15 @@
-/*
- * Game.cpp
- *
- *  Created on: 11 ott 2019
- *      Author: loren
- */
-
 #include "Game.h"
 
+using namespace std;
+using namespace sf;
+
 Game::Game() {
-	// TODO Auto-generated constructor stub
-	ContextSettings settings;
-	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
-	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
+}
+
+int Game::Run(sf::RenderWindow &window){
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
