@@ -15,6 +15,9 @@ int Game::Run(sf::RenderWindow &window){
 		while (window.pollEvent(event)) {
 			if (event.type == Event::Closed)
 				window.close();
+			if(event.type == Event::KeyPressed){
+				if(event.key.code == Keyboard::Escape) return 0;
+			}
 			ship.direction(event);
 			ship.ifShooting(event);
 		}
