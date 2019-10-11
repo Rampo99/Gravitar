@@ -1,49 +1,32 @@
 #include <SFML/Graphics.hpp>
-#include <cmath>
-#include <list>
-#include <iterator>
-#include "Spaceship.h"
-#include "Bullet.h"
-
-
+#include <iostream>
+#include "Screens.h"
 using namespace std;
 using namespace sf;
 
 
 int main()
 {
-	ContextSettings settings;
-	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
-	window.setKeyRepeatEnabled(false);
-	Spaceship ship;
-	list<Bullet*> bullets;
-	list<Bullet*>::iterator it;
-	while (window.isOpen()) {
-		Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == Event::Closed)
-				window.close();
-			ship.direction(event);
-			ship.ifShooting(event);
+	std::vector<Screen*> Screens;
+	int screen = 0;
+
+		//Window creation
+		sf::RenderWindow App(sf::VideoMode(640, 480, 32), "SFML Demo 3");
+
+		//Mouse cursor no more visible
+		App.setMouseCursorVisible(false);
+
+		//Screens preparations
+		Menu menu;
+		Screens.push_back(&menu);
+		Game game;
+		Screens.push_back(&game);
+
+		//Main loop
+		while (screen >= 0)
+		{
+			screen = Screens[screen]->Run(App);
 		}
-		ship.move();
-		ship.shoot(bullets);
-		window.clear();
-		ship.draw(window);
-		for(it = bullets.begin(); it != bullets.end(); ) {
-			(*it)->move();
-			if ((*it)->isAlive(window)) {
-				(*it)->draw(window);
-				it++;
-			}
-			else {
-				delete *it;
-				it = bullets.erase(it);
-			}
-		}
-		window.display();
-	}
-	return 0;
+
 }
 
