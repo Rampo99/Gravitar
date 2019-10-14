@@ -1,6 +1,7 @@
 #include "Planet.h"
 
 using namespace std;
+
 Planet::Planet() {
 	Head = new List;
 }

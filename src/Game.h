@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include <list>
 #include <SFML/Graphics.hpp>
+#include "Planet.h"
 
 #ifndef GAME_H_
 #define GAME_H_
@@ -15,6 +16,8 @@ private:
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
+	Planet k;
+	bool b = true;
 };
 
 #endif

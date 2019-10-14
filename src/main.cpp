@@ -9,7 +9,6 @@ int main(){
 	std::vector<Screen*> Screens;
 	int screen = 0;
 
-
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
@@ -21,8 +20,7 @@ int main(){
 	Screens.push_back(&game);
 
 	//Main loop
-	while (screen >= 0)
-	{
+	while (screen >= 0){
 		screen = Screens[screen]->Run(window);
 	}
 
