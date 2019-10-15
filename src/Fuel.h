@@ -6,7 +6,6 @@
 class Fuel {
 public:
 	Fuel(int a);
-	virtual ~Fuel();
 	void draw(sf::RenderWindow& w);
 
 private:

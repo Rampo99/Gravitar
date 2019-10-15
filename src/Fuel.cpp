@@ -25,10 +25,6 @@ Fuel::Fuel(int a) {
 
 }
 
-Fuel::~Fuel() {
-
-}
-
 void Fuel::draw(sf::RenderWindow& w){
 	w.draw(benza);
 }

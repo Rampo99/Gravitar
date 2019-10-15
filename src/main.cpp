@@ -8,7 +8,6 @@ using namespace sf;
 int main(){
 	std::vector<Screen*> Screens;
 	int screen = 0;
-
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	RenderWindow window(VideoMode(700, 700), "Gravitar", Style::Default, settings);
@@ -19,7 +18,6 @@ int main(){
 	Game game;
 	Screens.push_back(&game);
 
-	//Main loop
 	while (screen >= 0){
 		screen = Screens[screen]->Run(window);
 	}

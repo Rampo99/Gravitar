@@ -7,12 +7,11 @@ Game::Game() {
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
-	Planet k;
-	bool b;
+	Planet planet;
 }
 
 int Game::Run(sf::RenderWindow &window){
-	if (b)	k.terraforming(k.Head,window);
+	if (b)	planet.terraforming(planet.Lines,window);
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -34,7 +33,7 @@ int Game::Run(sf::RenderWindow &window){
 
 		window.clear();
 		ship.draw(window);
-		k.draw(window);
+		planet.draw(window);
 		for(it = bullets.begin(); it != bullets.end(); ) {
 			(*it)->move();
 			if ((*it)->isAlive(window)) {

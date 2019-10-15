@@ -6,7 +6,6 @@
 class Bunker {
 public:
 	Bunker(int a);
-	virtual ~Bunker();
 	void draw(sf::RenderWindow& w);
 private:
 	sf::ConvexShape bunker;

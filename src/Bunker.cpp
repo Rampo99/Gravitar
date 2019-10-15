@@ -37,9 +37,6 @@ Bunker::Bunker(int a) {
 	bunker.setPoint(19, sf::Vector2f(110,100));
 }
 
-Bunker::~Bunker() {
-
-}
 
 void Bunker::draw(sf::RenderWindow& w){
 	w.draw(bunker);

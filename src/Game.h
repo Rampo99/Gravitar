@@ -16,7 +16,7 @@ private:
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
-	Planet k;
+	Planet planet;
 	bool b = true;
 };
 

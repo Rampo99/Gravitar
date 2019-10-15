@@ -4,21 +4,23 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
-struct List{
+#include "Bunker.h"
+#include "Fuel.h"
+struct LinesList{
 	sf::VertexArray lines;
-	List *next;
-	List *prev;
+	LinesList *next;
+	LinesList *prev;
 };
 
-typedef List *ptr;
+typedef LinesList *ptrlines;
+
 class Planet {
 public:
 	Planet();
 	virtual ~Planet();
 	void draw(sf::RenderWindow& w);
-	void terraforming(ptr Head,sf::RenderWindow& w);
-	ptr Head;
+	void terraforming(ptrlines Lines,sf::RenderWindow& w);
+	ptrlines Lines;
 };
 
 #endif
