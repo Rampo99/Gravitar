@@ -1,56 +1,37 @@
 #include "Menu.h"
 
-Menu::Menu(void)
-{
-	a = 3 * 255;
-	b = 3;
+Menu::Menu(void){
 	gioco = false;
 }
 
-int Menu::Run(sf::RenderWindow &App)
-{
-	sf::Event Event;
-	bool Running = true;
-	sf::Sprite Sprite;
-	int k = 0;
+int Menu::Run(sf::RenderWindow &App){
 	sf::Font Font;
 	sf::Text Menu1;
 	sf::Text Menu2;
 	int menu = 0;
-
-	Sprite.setColor(sf::Color(255, 255, 255, k));
-	/*if (!Font.loadFromFile("verdanab.ttf"))
+	if(!Font.loadFromFile("font.ttf"))
 	{
-		std::cerr << "Error loading verdanab.ttf" << std::endl;
-		return (-1);
-	} */
+		std::cerr << "Error loading font" << std::endl;
+		return(-1);
+	}
 	Menu1.setFont(Font);
 	Menu1.setCharacterSize(20);
-	Menu1.setString("Gioca");
-	Menu1.setPosition({ 280.f, 160.f });
+	Menu1.setString("gioca");
+	Menu1.setPosition( 280, 160);
 
 	Menu2.setFont(Font);
 	Menu2.setCharacterSize(20);
-	Menu2.setString("Esci");
-	Menu2.setPosition({ 280.f, 220.f });
+	Menu2.setString("esci");
+	Menu2.setPosition( 280, 220 );
 
-	if (gioco)
-	{
-		k = a;
-	}
-
-	while (Running)
-	{
-		while (App.pollEvent(Event))
-		{
-			if (Event.type == sf::Event::Closed)
-			{
+	while(App.isOpen()){
+		sf::Event Event;
+		while(App.pollEvent(Event)){
+			if(Event.type == sf::Event::Closed){
 				return (-1);
 			}
-			if (Event.type == sf::Event::KeyPressed)
-			{
-				switch (Event.key.code)
-				{
+			if(Event.type == sf::Event::KeyPressed){
+				switch (Event.key.code){
 				case sf::Keyboard::Up:
 					menu = 0;
 					break;
@@ -58,15 +39,10 @@ int Menu::Run(sf::RenderWindow &App)
 					menu = 1;
 					break;
 				case sf::Keyboard::Enter:
-					if (menu == 0)
-					{
-						//Let's get play !
+					if (menu == 0){
 						gioco = true;
 						return (1);
-					}
-					else
-					{
-						//Let's get work...
+					} else {
 						return (-1);
 					}
 					break;
@@ -75,41 +51,25 @@ int Menu::Run(sf::RenderWindow &App)
 				}
 			}
 		}
-		//When getting at alpha_max, we stop modifying the sprite
-		if (k<a)
-		{
-			k++;
-		}
-		Sprite.setColor(sf::Color(255, 255, 255, k / b));
-		if (menu == 0)
-		{
-			Menu1.setColor(sf::Color(255, 0, 0, 255));
-			Menu2.setColor(sf::Color(255, 255, 255, 255));
-		}
-		else
-		{
-			Menu1.setColor(sf::Color(255, 255, 255, 255));
-			Menu2.setColor(sf::Color(255, 0, 0, 255));
+
+		if(menu == 0){
+			Menu1.setColor(sf::Color::Red);
+			Menu2.setColor(sf::Color::White);
+		} else {
+			Menu1.setColor(sf::Color::White);
+			Menu2.setColor(sf::Color::Red);
 		}
 
-		//Clearing screen
+		if(gioco){
+			Menu1.setString("continua");
+		}
+
 		App.clear();
-		//Drawing
-		App.draw(Sprite);
-		if (k == a)
-		{
-			if (gioco)
-			{
-				Menu1.setString("Continua");
-			}
-
-			App.draw(Menu1);
-			App.draw(Menu2);
-		}
+		App.draw(Menu1);
+		App.draw(Menu2);
 		App.display();
 	}
 
-	//Never reaching this point normally, but just in case, exit the application
-	return (-1);
+	return(-1);
 }
 

@@ -11,8 +11,6 @@ public:
 	Menu(void);
 	virtual int Run(sf::RenderWindow &App);
 private:
-	int a;
-	int b;
 	bool gioco;
 
 };

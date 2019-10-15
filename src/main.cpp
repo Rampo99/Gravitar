@@ -11,7 +11,7 @@ int main(){
 
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Default, settings);
+	RenderWindow window(VideoMode(700, 700), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 
 	Menu menu;

@@ -10,14 +10,14 @@ struct List{
 	List *next;
 	List *prev;
 };
-typedef List* ptr;
 
+typedef List *ptr;
 class Planet {
 public:
 	Planet();
 	virtual ~Planet();
 	void draw(sf::RenderWindow& w);
-	void terraforming(ptr Head);
+	void terraforming(ptr Head,sf::RenderWindow& w);
 	ptr Head;
 };
 

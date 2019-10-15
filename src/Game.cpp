@@ -12,7 +12,7 @@ Game::Game() {
 }
 
 int Game::Run(sf::RenderWindow &window){
-	if (b)	k.terraforming(k.Head);
+	if (b)	k.terraforming(k.Head,window);
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {

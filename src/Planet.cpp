@@ -10,31 +10,32 @@ Planet::~Planet() {
 
 }
 
-void Planet::terraforming(ptr Head){
+void Planet::terraforming(ptr Head,sf::RenderWindow& w){
 	int x = 0;
-	int y = 400;
+	int y = w.getSize().y-100;
 	Head->lines.setPrimitiveType(sf::Lines);
-	int k = 0;
 	srand(time(0));
-	while(x<500){
+	while(x<w.getSize().x){
 		Head->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
-		k++;
 		int r = (rand()%100)+1;
-		if(x==480){
+
+		if(x==w.getSize().x-20){
 			x+=19;
 		}else{
 			x+=20;
 		}
-		if(r<30){
-			if(y>30)y-=30;
-		} else if(r>=30 && r<60) {
-			if(y<470) y+=30;
+		if(y!=w.getSize().y-30){
+			if(r<30){
+				if(y>30) y-=30;
+			} else if(r>=30 && r<60) {
+				y+=30;
+			}
+		} else {
+			y +=29;
 		}
 		Head->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
-		k++;
-		if(x==499) x++;
-		cout << x << endl;
-		cout << k << endl;
+		if(x==w.getSize().x-1) x++;
+		if(y==w.getSize().y-1) y++;
 	}
 	// if back head->prev
 	// if next head->next
