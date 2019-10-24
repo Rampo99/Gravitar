@@ -11,6 +11,7 @@ public:
 	void position(int x, int y);
 	bool isdraw;
 	void drawing();
+	void rotation(int x);
 private:
 	sf::ConvexShape bunker;
 	int health = 100, turrets;

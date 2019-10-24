@@ -18,10 +18,13 @@ void Bunker::settype(int a){
 			break;
 		}
 }
-
+void Bunker::rotation(int x){
+	bunker.rotate(x);
+}
 void Bunker::drawing(){
 	bunker.setFillColor(sf::Color(255,255,255));
 	bunker.setPointCount(20);
+	bunker.setOrigin(135,250);
 	bunker.setPoint(0, sf::Vector2f(100,100));
 	bunker.setPoint(1, sf::Vector2f(100,150));
 	bunker.setPoint(2, sf::Vector2f(110,150));

@@ -15,6 +15,7 @@ Planet::~Planet() {
 void Planet::terraforming(ptrlines Lines, ptrbunkers Bunkers, ptrfuels Fuels, sf::RenderWindow& w){
 	unsigned int x = 0;
 	unsigned int y = w.getSize().y-100;
+	unsigned int x2, y2, finalx, finaly;
 	ptrfuels f = Fuels;
 	ptrbunkers b = Bunkers;
 	Lines->lines.setPrimitiveType(sf::Lines);
@@ -26,6 +27,8 @@ void Planet::terraforming(ptrlines Lines, ptrbunkers Bunkers, ptrfuels Fuels, sf
 		int percfuel = (rand()%100)+1;
 		int fueltype = 1;
 		int bunkertype = 1;
+		x2 = x;
+		y2 = y;
 		if(x==w.getSize().x-20){
 			x+=19;
 		}else{
@@ -40,10 +43,14 @@ void Planet::terraforming(ptrlines Lines, ptrbunkers Bunkers, ptrfuels Fuels, sf
 		} else {
 			y +=19;
 		}
+		Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
+		if(x-x2 < 0) finalx = -(x-x2); else finalx = x-x2;
+		if(y-y2 < 0) finaly = -(y-y2); else finaly = y-y2;
 		if(percfuel < 5){
 			f->fuel.settype(fueltype);
 			if(fueltype == 2) fueltype --; else fueltype++;
-			f->fuel.position(100,100);
+			f->fuel.position(x-finalx,y-finaly);
+			f->fuel.rotation((y-y2)*2);
 			cout << "fuel spawn";
 			f->next=new FuelList;
 			f->next->prev = f;
@@ -51,15 +58,18 @@ void Planet::terraforming(ptrlines Lines, ptrbunkers Bunkers, ptrfuels Fuels, sf
 		} else if(percbunker < 5){
 			b->bunker.settype(bunkertype);
 			if(bunkertype == 2) bunkertype --; else bunkertype++;
-			b->bunker.position(200,200);
+			b->bunker.position((x-finalx),(y-finaly));
+			b->bunker.rotation((y-y2)*2);
 			b->bunker.drawing();
+
 			cout << "bunker spawn";
 			b->next=new BunkerList;
 			b->next->prev = b;
 			b = b->next;
 		}
 
-		Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
+
+
 		if(x==w.getSize().x-1) x++;
 		if(y==w.getSize().y-1) y++;
 	}
