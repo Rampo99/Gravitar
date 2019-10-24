@@ -18,7 +18,7 @@ void Bunker::settype(int a){
 			break;
 		}
 }
-void Bunker::rotation(int x){
+void Bunker::rotation(double x){
 	bunker.rotate(x);
 }
 void Bunker::drawing(){

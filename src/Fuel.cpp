@@ -27,7 +27,7 @@ void Fuel::settype(int a){
 		}
 	isdraw = true;
 }
-void Fuel::rotation(int x){
+void Fuel::rotation(double x){
 	benza.rotate(x);
 }
 void Fuel::position(int x, int y){
