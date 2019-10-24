@@ -1,5 +1,4 @@
 #include "Game.h"
-
 using namespace std;
 using namespace sf;
 
@@ -11,7 +10,7 @@ Game::Game() {
 }
 
 int Game::Run(sf::RenderWindow &window){
-	if (b)	planet.terraforming(planet.Lines,window);
+	if (b)	planet.terraforming(planet.Lines,planet.Bunkers,planet.Fuels,window);
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {

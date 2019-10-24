@@ -5,8 +5,12 @@
 
 class Bunker {
 public:
-	Bunker(int a);
+	Bunker();
 	void draw(sf::RenderWindow& w);
+	void settype(int a);
+	void position(int x, int y);
+	bool isdraw;
+	void drawing();
 private:
 	sf::ConvexShape bunker;
 	int health = 100, turrets;

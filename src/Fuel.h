@@ -5,12 +5,14 @@
 
 class Fuel {
 public:
-	Fuel(int a);
+	Fuel();
 	void draw(sf::RenderWindow& w);
-
+	void settype(int a);
+	void position(int x, int y);
+	bool isdraw;
 private:
 	sf::ConvexShape benza;
-	int value, powerup;
+	int value;
 };
 
 #endif
