@@ -26,6 +26,8 @@ public:
 	void shoot(list<Bullet*>& bullets);
 	void move();
 	void draw(RenderWindow& window);
+	int getx();
+	int gety();
 };
 
 

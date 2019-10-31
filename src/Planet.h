@@ -8,11 +8,6 @@
 #include "Bunker.h"
 #include "Fuel.h"
 
-struct LinesList{
-	sf::VertexArray lines;
-	LinesList *next;
-	LinesList *prev;
-};
 struct BunkerList{
 	Bunker bunker;
 	BunkerList *next;
@@ -23,19 +18,33 @@ struct FuelList{
 	FuelList *next;
 	FuelList *prev;
 };
-typedef LinesList *ptrlines;
+
 typedef BunkerList *ptrbunkers;
 typedef FuelList *ptrfuels;
+
+struct LinesList{
+	sf::VertexArray lines;
+	ptrbunkers Bunkers;
+	ptrfuels Fuels;
+	LinesList *next;
+	LinesList *prev;
+	bool isdraw = false;
+};
+
+typedef LinesList *ptrlines;
+
 
 class Planet {
 public:
 	Planet();
-	virtual ~Planet();
 	void draw(sf::RenderWindow& w);
-	void terraforming(ptrlines Lines, ptrbunkers Bunkers, ptrfuels Fuels, sf::RenderWindow& w);
+	void setnBunkers(int n);
+	void setnFuels(int n);
+	void terraforming(ptrlines Lines, sf::RenderWindow& w, bool rightorleft);
 	ptrlines Lines;
-	ptrbunkers Bunkers;
-	ptrfuels Fuels;
+private:
+	int bunkers;
+	int fuels;
 };
 
 #endif

@@ -12,12 +12,13 @@ class Game : public Screen{
 public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
+	void setplanet(Planet pl);
 private:
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
 	Planet planet;
-	bool b = true;
+	bool doterraform = true;
 };
 
 #endif

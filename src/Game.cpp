@@ -8,9 +8,12 @@ Game::Game() {
 	list<Bullet*>::iterator it;
 	Planet planet;
 }
-
+void Game::setplanet(Planet pl){
+	planet = pl;
+}
 int Game::Run(sf::RenderWindow &window){
-	if (b)	planet.terraforming(planet.Lines,planet.Bunkers,planet.Fuels,window);
+	bool rightorleft = true; //true se la navicella va a dx, altrimenti false
+	if (doterraform) planet.terraforming(planet.Lines,window,rightorleft);
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -18,8 +21,7 @@ int Game::Run(sf::RenderWindow &window){
 				window.close();
 			if(event.type == Event::KeyPressed){
 				if(event.key.code == Keyboard::Escape){
-					//if(b) k.Head = k.Head->prev;
-					b = false;
+					doterraform = false;
 					return 0;
 				}
 			}

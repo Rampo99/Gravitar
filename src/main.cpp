@@ -15,7 +15,10 @@ int main(){
 
 	Menu menu;
 	Screens.push_back(&menu);
+	SolarSystem solarsystem;
+	Screens.push_back(&solarsystem);
 	Game game;
+	game.setplanet(solarsystem.alfa);
 	Screens.push_back(&game);
 
 	while (screen >= 0){

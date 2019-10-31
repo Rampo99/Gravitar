@@ -5,5 +5,6 @@
 
 #include "menu.h"
 #include "game.h"
+#include "SolarSystem.h"
 
 #endif
