@@ -3,16 +3,18 @@ using namespace std;
 using namespace sf;
 
 Game::Game() {
-	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
 	Planet planet;
+	rightorleft = 0;
 }
 void Game::setplanet(Planet pl){
 	planet = pl;
 }
+void Game::setShip(Spaceship& s){
+	ship = s;
+}
 int Game::Run(sf::RenderWindow &window){
-	bool rightorleft = true; //true se la navicella va a dx, altrimenti false
 	if (doterraform) planet.terraforming(planet.Lines,window,rightorleft);
 	while (window.isOpen()) {
 		Event event;
@@ -29,7 +31,7 @@ int Game::Run(sf::RenderWindow &window){
 			ship.ifShooting(event);
 		}
 
-		ship.move();
+		rightorleft = ship.move(window);
 		ship.shoot(bullets);
 
 		window.clear();

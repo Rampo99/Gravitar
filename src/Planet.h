@@ -40,7 +40,7 @@ public:
 	void draw(sf::RenderWindow& w);
 	void setnBunkers(int n);
 	void setnFuels(int n);
-	void terraforming(ptrlines Lines, sf::RenderWindow& w, bool rightorleft);
+	void terraforming(ptrlines Lines, sf::RenderWindow& w, int rightorleft);
 	ptrlines Lines;
 	sf::CircleShape circleplanet;
 private:

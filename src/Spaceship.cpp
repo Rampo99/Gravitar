@@ -142,7 +142,7 @@ void Spaceship::shoot(list<Bullet*>& bullets)
 	}
 }
 
-void Spaceship::move()
+int Spaceship::move(RenderWindow& window)
 {
 	Time elapsed = clock_move.restart();
 	double coeff = 1;
@@ -156,6 +156,19 @@ void Spaceship::move()
 		ship.setPosition(ship.getPosition().x + elapsed.asSeconds() * speed * coeff, ship.getPosition().y);
 	if (move_down)
 		ship.setPosition(ship.getPosition().x, ship.getPosition().y + elapsed.asSeconds() * speed * coeff);
+	if (gety() < 0)
+		ship.setPosition(getx(), 0);
+	else if(gety() > window.getSize().y)
+		ship.setPosition(getx(), window.getSize().y);
+	if (getx() < 0) {
+		ship.setPosition(window.getSize().x, gety());
+		return -1;
+	}
+	if (getx() > window.getSize().x) {
+		ship.setPosition(0, gety());
+		return 1;
+	}
+	return 0;
 }
 
 

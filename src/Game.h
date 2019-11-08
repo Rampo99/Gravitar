@@ -13,12 +13,14 @@ public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
 	void setplanet(Planet pl);
-private:
 	Spaceship ship;
+	void setShip(Spaceship& s);
+private:
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
 	Planet planet;
 	bool doterraform = true;
+	int rightorleft;
 };
 
 #endif

@@ -24,7 +24,7 @@ public:
 	void direction(Event event);
 	void ifShooting(Event event);
 	void shoot(list<Bullet*>& bullets);
-	void move();
+	int move(RenderWindow& window);
 	void draw(RenderWindow& window);
 	int getx();
 	int gety();

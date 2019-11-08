@@ -3,6 +3,7 @@
 SolarSystem::SolarSystem() {
 	bunkers = 2;
 	fuels = 1;
+	rightorleft = 0;
 }
 
 void SolarSystem::setupPlanets(){
@@ -25,7 +26,9 @@ void SolarSystem::setupPlanets(){
 	omega.circleplanet.setPosition(500,500);
 	omega.circleplanet.setRadius(20);
 }
-
+void SolarSystem::setShip(Spaceship& s){
+	ship = s;
+}
 int SolarSystem::Run(sf::RenderWindow &window){
 	setupPlanets();
 	while (window.isOpen()) {
@@ -37,13 +40,32 @@ int SolarSystem::Run(sf::RenderWindow &window){
 				if(event.key.code == sf::Keyboard::Escape){
 					return 0;
 				}
+				if(event.key.code == sf::Keyboard::P){
+					return 2;
+				}
 			}
+			ship.direction(event);
+			ship.ifShooting(event);
 		}
+		rightorleft = ship.move(window);
+		ship.shoot(bullets);
 		window.clear();
+		ship.draw(window);
 		window.draw(alfa.circleplanet);
 		window.draw(beta.circleplanet);
 		window.draw(gamma.circleplanet);
 		window.draw(omega.circleplanet);
+		for(it = bullets.begin(); it != bullets.end(); ) {
+			(*it)->move();
+			if ((*it)->isAlive(window)) {
+				(*it)->draw(window);
+				it++;
+			}
+			else {
+				delete *it;
+				it = bullets.erase(it);
+			}
+		}
 		window.display();
 	}
 	return 0;
