@@ -1,5 +1,6 @@
 #include "Planet.h"
 #include "Screen.h"
+#include <SFML/Graphics.hpp>
 
 #ifndef SOLARSYSTEM_H_
 #define SOLARSYSTEM_H_

@@ -42,6 +42,7 @@ public:
 	void setnFuels(int n);
 	void terraforming(ptrlines Lines, sf::RenderWindow& w, bool rightorleft);
 	ptrlines Lines;
+	sf::CircleShape circleplanet;
 private:
 	int bunkers;
 	int fuels;
