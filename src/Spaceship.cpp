@@ -34,7 +34,6 @@ Spaceship::Spaceship()
 	ship.setPoint(14, Vector2f(28, 0));
 	ship.setPoint(15, Vector2f(14, 7));
 	ship.setOrigin(28, 28);
-	ship.setPosition(100,100);
 	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 400;
 	ratio = 1.0 / 3.0;
@@ -110,7 +109,9 @@ void Spaceship::ifShooting(Event event)
 	if (event.type == Event::KeyReleased && event.key.code == Keyboard::L)
 		shooting = false;
 }
-
+void Spaceship::setposition(int x, int y){
+	ship.setPosition(x,y);
+}
 int Spaceship::getx(){
 	return ship.getPosition().x;
 }
@@ -156,15 +157,17 @@ int Spaceship::move(RenderWindow& window)
 		ship.setPosition(ship.getPosition().x + elapsed.asSeconds() * speed * coeff, ship.getPosition().y);
 	if (move_down)
 		ship.setPosition(ship.getPosition().x, ship.getPosition().y + elapsed.asSeconds() * speed * coeff);
+
 	if (gety() < 0)
 		ship.setPosition(getx(), 0);
 	else if(gety() > window.getSize().y)
 		ship.setPosition(getx(), window.getSize().y);
+
 	if (getx() < 0) {
 		ship.setPosition(window.getSize().x, gety());
 		return -1;
 	}
-	if (getx() > window.getSize().x) {
+	else if (getx() > window.getSize().x) {
 		ship.setPosition(0, gety());
 		return 1;
 	}
@@ -172,7 +175,7 @@ int Spaceship::move(RenderWindow& window)
 }
 
 
-void  Spaceship::draw(RenderWindow& window){
+void Spaceship::draw(RenderWindow& window){
 	window.draw(ship);
 }
 

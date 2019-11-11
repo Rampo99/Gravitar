@@ -21,6 +21,7 @@ private:
 
 public:
 	Spaceship();
+	void setposition(int x, int y);
 	void direction(Event event);
 	void ifShooting(Event event);
 	void shoot(list<Bullet*>& bullets);

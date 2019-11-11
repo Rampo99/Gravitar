@@ -14,6 +14,7 @@ int main(){
 	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
+	ship.setposition(window.getSize().x/2,window.getSize().y/2);
 	Menu menu;
 	Screens.push_back(&menu);
 	SolarSystem solarsystem;
@@ -21,10 +22,12 @@ int main(){
 	Screens.push_back(&solarsystem);
 	Game game;
 	game.setShip(ship);
-	game.setplanet(solarsystem.alfa);
+	solarsystem.setGame(game);
 	Screens.push_back(&game);
 
 	while (screen >= 0){
+		if(screen == 2) menu.setreturnint(screen);
+		else if(screen == 1) menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
 	}
 

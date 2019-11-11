@@ -16,8 +16,22 @@ void Planet::setnBunkers(int n){
 void Planet::setnFuels(int n){
 	fuels = n;
 }
-void Planet::terraforming(ptrlines Lines, sf::RenderWindow& w, int rightorleft){
+void Planet::terraforming(sf::RenderWindow& w, int rightorleft){
+	if(rightorleft == 1){
+		if(Lines->next == NULL){
+			Lines->next = new LinesList;
+			Lines->next->prev = Lines;
+		}
+		Lines = Lines->next;
+	} else if(rightorleft == -1) {
+		if(Lines->prev == NULL){
+			Lines->prev = new LinesList;
+			Lines->prev->next = Lines;
+		}
+		Lines = Lines->prev;
+	}
 	if(Lines->isdraw == false){
+		Lines->isdraw = true;
 		unsigned int x = 0;
 		unsigned int y = w.getSize().y-100;
 		unsigned int y2;
@@ -84,16 +98,8 @@ void Planet::terraforming(ptrlines Lines, sf::RenderWindow& w, int rightorleft){
 			if(x==w.getSize().x-1) x++;
 			if(y==w.getSize().y-1) y++;
 		}
-		if(rightorleft){
-			Lines->next= new LinesList;
-			Lines->next->prev = Lines;
-		} else {
-			Lines->prev = new LinesList;
-			Lines->prev->next = Lines;
-		}
+
 	}
-	if(rightorleft==1)	Lines = Lines->next;
-	if(rightorleft==-1) Lines = Lines->prev;
 }
 void Planet::draw(sf::RenderWindow& w){
 	ptrfuels f = Lines->Fuels;

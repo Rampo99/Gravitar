@@ -10,8 +10,10 @@ class Menu : public Screen{
 public:
 	Menu(void);
 	virtual int Run(sf::RenderWindow &App);
+	void setreturnint(int a);
 private:
 	bool gioco;
+	int returnint;
 
 };
 

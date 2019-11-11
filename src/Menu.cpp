@@ -2,8 +2,11 @@
 
 Menu::Menu(void){
 	gioco = false;
+	returnint = 1;
 }
-
+void Menu::setreturnint(int a){
+	returnint = a;
+}
 int Menu::Run(sf::RenderWindow &App){
 	sf::Font Font;
 	sf::Text Menu1;
@@ -41,7 +44,7 @@ int Menu::Run(sf::RenderWindow &App){
 				case sf::Keyboard::Enter:
 					if (menu == 0){
 						gioco = true;
-						return (1);
+						return (returnint);
 					} else {
 						return (-1);
 					}
