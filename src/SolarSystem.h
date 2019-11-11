@@ -1,4 +1,3 @@
-#include "Planet.h"
 #include "Screen.h"
 #include "Spaceship.h"
 #include <SFML/Graphics.hpp>
@@ -14,21 +13,18 @@ public:
 	virtual int Run(sf::RenderWindow &App);
 	void setupPlanets();
 	void setShip(Spaceship& s);
-	void setGame(Game &g);
 	int checkcollide();
-	Planet alfa;
-	Planet beta;
-	Planet gamma;
-	Planet omega;
-	Spaceship ship;
-	Game game;
+
 private:
+	sf::CircleShape alfa;
+	sf::CircleShape beta;
+	sf::CircleShape gamma;
+	sf::CircleShape omega;
+	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
-	int bunkers;
-	int fuels;
 	int rightorleft;
-	bool issetup;
+
 };
 
 #endif

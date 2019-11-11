@@ -1,58 +1,42 @@
 #include "SolarSystem.h"
 
 SolarSystem::SolarSystem() {
-	bunkers = 2;
-	fuels = 1;
 	rightorleft = 0;
-	issetup = false;
-}
-void SolarSystem::setGame(Game& g){
-	game = g;
-}
-void SolarSystem::setupPlanets(){
-	if(!issetup){
-		alfa.setnBunkers(bunkers);
-		beta.setnBunkers(bunkers+1);
-		gamma.setnBunkers(bunkers+2);
-		omega.setnBunkers(bunkers+3);
-		bunkers++;
-		alfa.setnFuels(fuels);
-		beta.setnFuels(fuels+1);
-		gamma.setnFuels(fuels+2);
-		omega.setnFuels(fuels+3);
-		alfa.circleplanet.setOrigin(10,10);
-		alfa.circleplanet.setPosition(100,100);
-		alfa.circleplanet.setRadius(20);
-		beta.circleplanet.setOrigin(10,10);
-		beta.circleplanet.setPosition(100,500);
-		beta.circleplanet.setRadius(20);
-		gamma.circleplanet.setOrigin(10,10);
-		gamma.circleplanet.setPosition(500,100);
-		gamma.circleplanet.setRadius(20);
-		omega.circleplanet.setOrigin(10,10);
-		omega.circleplanet.setPosition(500,500);
-		omega.circleplanet.setRadius(20);
-		issetup = true;
-	}
+	sf::CircleShape alfa;
+	sf::CircleShape beta;
+	sf::CircleShape gamma;
+	sf::CircleShape omega;
+	Spaceship ship;
 }
 void SolarSystem::setShip(Spaceship& s){
 	ship = s;
 }
+void SolarSystem::setupPlanets(){
+		alfa.setOrigin(10,10);
+		alfa.setPosition(100,100);
+		alfa.setRadius(20);
+		beta.setOrigin(10,10);
+		beta.setPosition(100,500);
+		beta.setRadius(20);
+		gamma.setOrigin(10,10);
+		gamma.setPosition(500,100);
+		gamma.setRadius(20);
+		omega.setOrigin(10,10);
+		omega.setPosition(500,500);
+		omega.setRadius(20);
+}
+
 int SolarSystem::checkcollide(){
-	if((ship.getx() >= alfa.circleplanet.getPosition().x - 30 && ship.getx() <= alfa.circleplanet.getPosition().x + 30) && (ship.gety() >= alfa.circleplanet.getPosition().y - 30 && ship.gety() <= alfa.circleplanet.getPosition().y + 30)){
-		game.setplanet(alfa);
+	if((ship.getx() >= alfa.getPosition().x - 30 && ship.getx() <= alfa.getPosition().x + 30) && (ship.gety() >= alfa.getPosition().y - 30 && ship.gety() <= alfa.getPosition().y + 30)){
 		return 2;
 	}
-	if((ship.getx() >= beta.circleplanet.getPosition().x - 30 && ship.getx() <= beta.circleplanet.getPosition().x + 30) && (ship.gety() >= beta.circleplanet.getPosition().y - 30 && ship.gety() <= beta.circleplanet.getPosition().y + 30)){
-		game.setplanet(beta);
+	if((ship.getx() >= beta.getPosition().x - 30 && ship.getx() <= beta.getPosition().x + 30) && (ship.gety() >= beta.getPosition().y - 30 && ship.gety() <= beta.getPosition().y + 30)){
 		return 2;
 	}
-	if((ship.getx() >= omega.circleplanet.getPosition().x - 30 && ship.getx() <= omega.circleplanet.getPosition().x + 30) && (ship.gety() >= omega.circleplanet.getPosition().y - 30 && ship.gety() <= omega.circleplanet.getPosition().y + 30)){
-		game.setplanet(omega);
+	if((ship.getx() >= omega.getPosition().x - 30 && ship.getx() <= omega.getPosition().x + 30) && (ship.gety() >= omega.getPosition().y - 30 && ship.gety() <= omega.getPosition().y + 30)){
 		return 2;
 	}
-	if((ship.getx() >= gamma.circleplanet.getPosition().x - 30 && ship.getx() <= gamma.circleplanet.getPosition().x + 30) && (ship.gety() >= gamma.circleplanet.getPosition().y - 30 && ship.gety() <= gamma.circleplanet.getPosition().y + 30)){
-		game.setplanet(gamma);
+	if((ship.getx() >= gamma.getPosition().x - 30 && ship.getx() <= gamma.getPosition().x + 30) && (ship.gety() >= gamma.getPosition().y - 30 && ship.gety() <= gamma.getPosition().y + 30)){
 		return 2;
 	}
 
@@ -78,10 +62,10 @@ int SolarSystem::Run(sf::RenderWindow &window){
 		ship.shoot(bullets);
 		window.clear();
 		ship.draw(window);
-		window.draw(alfa.circleplanet);
-		window.draw(beta.circleplanet);
-		window.draw(gamma.circleplanet);
-		window.draw(omega.circleplanet);
+		window.draw(alfa);
+		window.draw(beta);
+		window.draw(gamma);
+		window.draw(omega);
 		for(it = bullets.begin(); it != bullets.end(); ) {
 			(*it)->move();
 			if ((*it)->isAlive(window)) {

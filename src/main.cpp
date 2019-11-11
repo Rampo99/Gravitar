@@ -22,7 +22,6 @@ int main(){
 	Screens.push_back(&solarsystem);
 	Game game;
 	game.setShip(ship);
-	solarsystem.setGame(game);
 	Screens.push_back(&game);
 
 	while (screen >= 0){
