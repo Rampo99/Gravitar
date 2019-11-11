@@ -112,11 +112,11 @@ void Spaceship::ifShooting(Event event)
 void Spaceship::setposition(int x, int y){
 	ship.setPosition(x,y);
 }
-int Spaceship::getx(){
+double Spaceship::getx(){
 	return ship.getPosition().x;
 }
 
-int Spaceship::gety(){
+double Spaceship::gety(){
 	return ship.getPosition().y;
 }
 void Spaceship::shoot(list<Bullet*>& bullets)
