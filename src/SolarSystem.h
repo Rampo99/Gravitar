@@ -17,14 +17,16 @@ public:
 
 private:
 	sf::CircleShape alfa;
+	bool alfacheck;
 	sf::CircleShape beta;
+	bool betacheck;
 	sf::CircleShape gamma;
+	bool gammacheck;
 	sf::CircleShape omega;
+	bool omegacheck;
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
-	int rightorleft;
-
 };
 
 #endif

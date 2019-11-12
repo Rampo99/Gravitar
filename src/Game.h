@@ -1,6 +1,7 @@
 #include "Screen.h"
 #include "Spaceship.h"
 #include "Bullet.h"
+#include <iostream>
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "Bunker.h"
@@ -46,10 +47,11 @@ public:
 	void terraforming(sf::RenderWindow& w, int rightorleft);
 	void draw(sf::RenderWindow& w);
 	ptrlines Lines;
+	unsigned int x,y;
+	bool setup = true;
 private:
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
-	bool doterraform = true;
 	int bunkers;
 	int fuels;
 };

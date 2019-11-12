@@ -20,14 +20,28 @@ int main(){
 	SolarSystem solarsystem;
 	solarsystem.setShip(ship);
 	Screens.push_back(&solarsystem);
-	Game game;
-	game.setShip(ship);
-	Screens.push_back(&game);
+	int bunkers = 2, fuels = 1;
+	Game* game = new Game;
+	game->setnBunkers(bunkers);
+	game->setnFuels(fuels);
+	game->setShip(ship);
+	Screens.push_back(game);
 
 	while (screen >= 0){
 		if(screen == 2) menu.setreturnint(screen);
 		else if(screen == 1) menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
+		if(screen == 3){
+			bunkers++;
+			fuels++;
+			delete game;
+			game = NULL;
+			game = new Game;
+			game->setnBunkers(bunkers);
+			game->setnFuels(fuels);
+			game->setShip(ship);
+			screen = 1;
+		}
 	}
 
 }

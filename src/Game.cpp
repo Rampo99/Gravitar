@@ -13,6 +13,7 @@ Game::Game() {
 	bunkers = 0;
 	fuels = 0;
 }
+
 void Game::setnBunkers(int n){
 	bunkers = n;
 }
@@ -23,6 +24,7 @@ void Game::setShip(Spaceship& s){
 	ship = s;
 }
 int Game::Run(sf::RenderWindow &window){
+	cout << "bunkers: " << bunkers << "  Fuels: " <<  fuels;
 	while (window.isOpen()) {
 
 		Event event;
@@ -32,6 +34,9 @@ int Game::Run(sf::RenderWindow &window){
 			if(event.type == Event::KeyPressed){
 				if(event.key.code == Keyboard::Escape){
 					return 0;
+				}
+				if(event.key.code == Keyboard::K){
+					return 3;
 				}
 			}
 			ship.direction(event);
@@ -68,23 +73,26 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			Lines->next->prev = Lines;
 			Lines->next->Bunkers = new BunkerList;
 			Lines->next->Fuels = new FuelList;
+			Lines->next->next = NULL;
 		}
 		Lines = Lines->next;
-		Lines->next = NULL;
 	} else if(rightorleft == -1) {
 		if(Lines->prev == NULL){
 			Lines->prev = new LinesList;
 			Lines->prev->next = Lines;
 			Lines->prev->Bunkers = new BunkerList;
 			Lines->prev->Fuels = new FuelList;
+			Lines->prev->prev = NULL;
 		}
 		Lines = Lines->prev;
-		Lines->prev = NULL;
 	}
 	if(Lines->isdraw == false){
 		Lines->isdraw = true;
-		unsigned int x = 0;
-		unsigned int y = w.getSize().y-100;
+		x = 0;
+		if(setup){
+			y=w.getSize().y-100;
+			setup = false;
+		}
 		unsigned int y2;
 		int finaly;
 		ptrfuels f = Lines->Fuels;
