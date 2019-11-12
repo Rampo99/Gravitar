@@ -17,9 +17,9 @@ int main(){
 	ship.setposition(window.getSize().x/2,window.getSize().y/2);
 	Menu menu;
 	Screens.push_back(&menu);
-	SolarSystem solarsystem;
-	solarsystem.setShip(ship);
-	Screens.push_back(&solarsystem);
+	SolarSystem* solarsystem = new SolarSystem;
+	solarsystem->setShip(ship);
+	Screens.push_back(solarsystem);
 	int bunkers = 2, fuels = 1;
 	Game* game = new Game;
 	game->setnBunkers(bunkers);
@@ -40,6 +40,13 @@ int main(){
 			game->setnBunkers(bunkers);
 			game->setnFuels(fuels);
 			game->setShip(ship);
+			screen = 1;
+		}
+		if(screen == 4){
+			delete solarsystem;
+			solarsystem = NULL;
+			solarsystem = new SolarSystem;
+			solarsystem->setShip(ship);
 			screen = 1;
 		}
 	}

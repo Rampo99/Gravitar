@@ -16,18 +16,26 @@ void SolarSystem::setShip(Spaceship& s){
 }
 
 void SolarSystem::setupPlanets(){
+	if(alfacheck){
 	alfa.setOrigin(10,10);
 	alfa.setPosition(100,100);
 	alfa.setRadius(20);
+	}
+	if(betacheck){
 	beta.setOrigin(10,10);
 	beta.setPosition(100,500);
 	beta.setRadius(20);
+	}
+	if(gammacheck){
 	gamma.setOrigin(10,10);
 	gamma.setPosition(500,100);
 	gamma.setRadius(20);
+	}
+	if(omegacheck){
 	omega.setOrigin(10,10);
 	omega.setPosition(500,500);
 	omega.setRadius(20);
+	}
 }
 
 int SolarSystem::checkcollide(){
@@ -56,6 +64,7 @@ int SolarSystem::checkcollide(){
 }
 int SolarSystem::Run(sf::RenderWindow &window){
 	setupPlanets();
+	if(!alfacheck && !betacheck && !gammacheck && !omegacheck) return 4;
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
