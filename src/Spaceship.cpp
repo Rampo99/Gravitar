@@ -40,7 +40,9 @@ Spaceship::Spaceship()
 	for_shooting = seconds(ratio);
 }
 
-
+void Spaceship::reset(){
+	move_left = move_up = move_right = move_down = shooting = false;
+}
 void Spaceship::direction(Event event)
 {
 	switch (event.type) {
@@ -173,7 +175,6 @@ int Spaceship::move(RenderWindow& window)
 	}
 	return 0;
 }
-
 
 void Spaceship::draw(RenderWindow& window){
 	window.draw(ship);

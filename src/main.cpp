@@ -29,25 +29,45 @@ int main(){
 
 	while (screen >= 0){
 		if(screen == 2) menu.setreturnint(screen);
-		else if(screen == 1) menu.setreturnint(screen);
+		if(screen == 1) menu.setreturnint(screen);
+
 		screen = Screens[screen]->Run(window);
 		if(screen == 3){
 			bunkers++;
 			fuels++;
+			cout << "dioporco";
 			delete game;
 			game = NULL;
 			game = new Game;
+			cout << "ciao";
 			game->setnBunkers(bunkers);
 			game->setnFuels(fuels);
 			game->setShip(ship);
+			Screens[2] = game;
+			if(solarsystem->check()){
+				delete solarsystem;
+				solarsystem = NULL;
+				solarsystem = new SolarSystem;
+				solarsystem->setShip(ship);
+				Screens[1] = solarsystem;
+			}
 			screen = 1;
 		}
 		if(screen == 4){
-			delete solarsystem;
-			solarsystem = NULL;
-			solarsystem = new SolarSystem;
-			solarsystem->setShip(ship);
-			screen = 1;
+			solarsystem->alfacheck = false;
+			screen = 2;
+		}
+		if(screen == 5){
+			solarsystem->betacheck = false;
+			screen = 2;
+		}
+		if(screen == 6){
+			solarsystem->omegacheck = false;
+			screen = 2;
+		}
+		if(screen == 7){
+			solarsystem->gammacheck = false;
+			screen = 2;
 		}
 	}
 

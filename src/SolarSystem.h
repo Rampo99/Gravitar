@@ -14,16 +14,17 @@ public:
 	void setupPlanets();
 	void setShip(Spaceship& s);
 	int checkcollide();
-
+	bool check();
+	bool alfacheck = true;
+	bool betacheck = true;
+	bool gammacheck = true;
+	bool omegacheck = true;
 private:
 	sf::CircleShape alfa;
-	bool alfacheck;
 	sf::CircleShape beta;
-	bool betacheck;
 	sf::CircleShape gamma;
-	bool gammacheck;
 	sf::CircleShape omega;
-	bool omegacheck;
+
 	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;

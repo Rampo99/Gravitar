@@ -2,69 +2,61 @@
 
 SolarSystem::SolarSystem() {
 	sf::CircleShape alfa;
-	alfacheck = true;
 	sf::CircleShape beta;
-	betacheck = true;
 	sf::CircleShape gamma;
-	gammacheck = true;
 	sf::CircleShape omega;
-	omegacheck = true;
 	Spaceship ship;
 }
 void SolarSystem::setShip(Spaceship& s){
 	ship = s;
 }
-
 void SolarSystem::setupPlanets(){
 	if(alfacheck){
-	alfa.setOrigin(10,10);
-	alfa.setPosition(100,100);
-	alfa.setRadius(20);
+		alfa.setOrigin(10,10);
+		alfa.setPosition(100,100);
+		alfa.setRadius(20);
 	}
 	if(betacheck){
-	beta.setOrigin(10,10);
-	beta.setPosition(100,500);
-	beta.setRadius(20);
+		beta.setOrigin(10,10);
+		beta.setPosition(100,500);
+		beta.setRadius(20);
 	}
 	if(gammacheck){
-	gamma.setOrigin(10,10);
-	gamma.setPosition(500,100);
-	gamma.setRadius(20);
+		gamma.setOrigin(10,10);
+		gamma.setPosition(500,100);
+		gamma.setRadius(20);
 	}
 	if(omegacheck){
-	omega.setOrigin(10,10);
-	omega.setPosition(500,500);
-	omega.setRadius(20);
+		omega.setOrigin(10,10);
+		omega.setPosition(500,500);
+		omega.setRadius(20);
 	}
 }
-
+bool SolarSystem::check(){
+	return (!alfacheck && !betacheck && !gammacheck && !omegacheck);
+}
 int SolarSystem::checkcollide(){
 	if(alfacheck)
-	if((ship.getx() >= alfa.getPosition().x - 30 && ship.getx() <= alfa.getPosition().x + 30) && (ship.gety() >= alfa.getPosition().y - 30 && ship.gety() <= alfa.getPosition().y + 30)){
-		return 2;
-		alfacheck = false;
-	}
-	if(betacheck)
-	if((ship.getx() >= beta.getPosition().x - 30 && ship.getx() <= beta.getPosition().x + 30) && (ship.gety() >= beta.getPosition().y - 30 && ship.gety() <= beta.getPosition().y + 30)){
-		betacheck = false;
-		return 2;
-	}
-	if(gammacheck)
-	if((ship.getx() >= omega.getPosition().x - 30 && ship.getx() <= omega.getPosition().x + 30) && (ship.gety() >= omega.getPosition().y - 30 && ship.gety() <= omega.getPosition().y + 30)){
-		gammacheck = false;
-		return 2;
-	}
-	if(omegacheck)
-	if((ship.getx() >= gamma.getPosition().x - 30 && ship.getx() <= gamma.getPosition().x + 30) && (ship.gety() >= gamma.getPosition().y - 30 && ship.gety() <= gamma.getPosition().y + 30)){
-		omegacheck = false;
-		return 2;
-	}
+		if((ship.getx() >= alfa.getPosition().x - 30 && ship.getx() <= alfa.getPosition().x + 30) && (ship.gety() >= alfa.getPosition().y - 30 && ship.gety() <= alfa.getPosition().y + 30)){
+			return 4;
+		}
 
+	if(betacheck)
+		if((ship.getx() >= beta.getPosition().x - 30 && ship.getx() <= beta.getPosition().x + 30) && (ship.gety() >= beta.getPosition().y - 30 && ship.gety() <= beta.getPosition().y + 30)){
+			return 5;
+		}
+	if(omegacheck)
+		if((ship.getx() >= omega.getPosition().x - 30 && ship.getx() <= omega.getPosition().x + 30) && (ship.gety() >= omega.getPosition().y - 30 && ship.gety() <= omega.getPosition().y + 30)){
+			return 6;
+		}
+	if(gammacheck)
+		if((ship.getx() >= gamma.getPosition().x - 30 && ship.getx() <= gamma.getPosition().x + 30) && (ship.gety() >= gamma.getPosition().y - 30 && ship.gety() <= gamma.getPosition().y + 30)){
+			return 7;
+		}
 	return 0;
 }
 int SolarSystem::Run(sf::RenderWindow &window){
 	setupPlanets();
-	if(!alfacheck && !betacheck && !gammacheck && !omegacheck) return 4;
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -83,10 +75,14 @@ int SolarSystem::Run(sf::RenderWindow &window){
 		ship.shoot(bullets);
 		window.clear();
 		ship.draw(window);
-		window.draw(alfa);
-		window.draw(beta);
-		window.draw(gamma);
-		window.draw(omega);
+		if(alfacheck)
+			window.draw(alfa);
+		if(betacheck)
+			window.draw(beta);
+		if(gammacheck)
+			window.draw(gamma);
+		if(omegacheck)
+			window.draw(omega);
 		for(it = bullets.begin(); it != bullets.end(); ) {
 			(*it)->move();
 			if ((*it)->isAlive(window)) {
@@ -98,7 +94,10 @@ int SolarSystem::Run(sf::RenderWindow &window){
 				it = bullets.erase(it);
 			}
 		}
-		if(checkcollide() == 2)	return checkcollide();
+		if(checkcollide() != 0){
+			ship.reset();
+			return checkcollide();
+		}
 
 		window.display();
 	}
