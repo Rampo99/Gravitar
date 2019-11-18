@@ -32,7 +32,7 @@ struct LinesList{
 	ptrfuels Fuels;
 	LinesList *next;
 	LinesList *prev;
-	bool isdraw = false;
+	bool isdraw = false; //this is a bool check to prevent terraforming if it's already done
 };
 typedef LinesList *ptrlines;
 
@@ -41,13 +41,13 @@ public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
 	Spaceship ship;
-	void setShip(Spaceship& s);
-	void setnBunkers(int n);
-	void setnFuels(int n);
-	void terraforming(sf::RenderWindow& w, int rightorleft);
+	void setShip(Spaceship& s); //Set ship from main
+	void setnBunkers(int n); //set number of bunkers for current game
+	void setnFuels(int n); //set number of fuels for current game
+	void terraforming(sf::RenderWindow& w, int rightorleft); //creates terrain in run-time
 	void draw(sf::RenderWindow& w);
 	ptrlines Lines;
-	unsigned int x,y;
+	unsigned int x = 0,y = 0;
 	bool setup = true;
 private:
 	list<Bullet*> bullets;

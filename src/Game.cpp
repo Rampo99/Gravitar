@@ -24,6 +24,10 @@ void Game::setShip(Spaceship& s){
 	ship = s;
 }
 int Game::Run(sf::RenderWindow &window){
+	/*
+	 * 3 is the int value of planet-completed
+	 *
+	 */
 	cout << "bunkers: " << bunkers << "  Fuels: " <<  fuels;
 	while (window.isOpen()) {
 
@@ -67,6 +71,11 @@ int Game::Run(sf::RenderWindow &window){
 	return 0;
 }
 void Game::terraforming(sf::RenderWindow& w, int rightorleft){
+	/*rightorleft is
+	 * 1 if ship goes over right-window border
+	 * -1 if ship goes over left-window border
+	 * (check spaceship::move function)
+	 */
 	if(rightorleft == 1){
 		if(Lines->next == NULL){
 			Lines->next = new LinesList;

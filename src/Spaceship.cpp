@@ -167,13 +167,13 @@ int Spaceship::move(RenderWindow& window)
 
 	if (getx() < 0) {
 		ship.setPosition(window.getSize().x, gety());
-		return -1;
+		return -1; //spaceship is going over left-window border
 	}
 	else if (getx() > window.getSize().x) {
 		ship.setPosition(0, gety());
-		return 1;
+		return 1; //spaceship is going over right-window border
 	}
-	return 0;
+	return 0; //spaceship moving in-window bounds.
 }
 
 void Spaceship::draw(RenderWindow& window){

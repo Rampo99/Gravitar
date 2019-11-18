@@ -36,24 +36,31 @@ bool SolarSystem::check(){
 	return (!alfacheck && !betacheck && !gammacheck && !omegacheck);
 }
 int SolarSystem::checkcollide(){
+	/* Return int value based on which planet is joined.
+	 * 0 = no planet (so no collision)
+	 * 4 = omega
+	 * 5 = beta
+	 * 6 = gamma
+	 * 7 = omega
+	 */
 	if(alfacheck)
 		if((ship.getx() >= alfa.getPosition().x - 30 && ship.getx() <= alfa.getPosition().x + 30) && (ship.gety() >= alfa.getPosition().y - 30 && ship.gety() <= alfa.getPosition().y + 30)){
-			return 4;
+			return 4; //player enters alfa
 		}
 
 	if(betacheck)
 		if((ship.getx() >= beta.getPosition().x - 30 && ship.getx() <= beta.getPosition().x + 30) && (ship.gety() >= beta.getPosition().y - 30 && ship.gety() <= beta.getPosition().y + 30)){
-			return 5;
+			return 5; //player enters beta
 		}
 	if(omegacheck)
 		if((ship.getx() >= omega.getPosition().x - 30 && ship.getx() <= omega.getPosition().x + 30) && (ship.gety() >= omega.getPosition().y - 30 && ship.gety() <= omega.getPosition().y + 30)){
-			return 6;
+			return 6; //plater enters omega
 		}
 	if(gammacheck)
 		if((ship.getx() >= gamma.getPosition().x - 30 && ship.getx() <= gamma.getPosition().x + 30) && (ship.gety() >= gamma.getPosition().y - 30 && ship.gety() <= gamma.getPosition().y + 30)){
-			return 7;
+			return 7; //plater enters gamma
 		}
-	return 0;
+	return 0; //0 = no collision
 }
 int SolarSystem::Run(sf::RenderWindow &window){
 	setupPlanets();
@@ -94,7 +101,7 @@ int SolarSystem::Run(sf::RenderWindow &window){
 				it = bullets.erase(it);
 			}
 		}
-		if(checkcollide() != 0){
+		if(checkcollide() != 0){ //checkcollide must be != 0 cause 0 is value of no-collision
 			ship.reset();
 			return checkcollide();
 		}

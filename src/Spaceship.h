@@ -24,7 +24,7 @@ public:
 	void setposition(int x, int y);
 	void direction(Event event);
 	void ifShooting(Event event);
-	void reset();
+	void reset(); //reset spaceship movements to prevent run-time bugs.
 	void shoot(list<Bullet*>& bullets);
 	int move(RenderWindow& window);
 	void draw(RenderWindow& window);

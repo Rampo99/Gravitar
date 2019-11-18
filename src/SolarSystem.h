@@ -11,10 +11,10 @@ class SolarSystem : public Screen{
 public:
 	SolarSystem();
 	virtual int Run(sf::RenderWindow &App);
-	void setupPlanets();
-	void setShip(Spaceship& s);
-	int checkcollide();
-	bool check();
+	void setupPlanets(); //setup solarsystem planets (solarsystem view)
+	void setShip(Spaceship& s); //set spaceship from main
+	int checkcollide(); //checks if spaceship collides a planet
+	bool check(); //checks if planets are already completed
 	bool alfacheck = true;
 	bool betacheck = true;
 	bool gammacheck = true;
