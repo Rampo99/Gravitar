@@ -57,9 +57,9 @@ int Game::Run(sf::RenderWindow &window)
 		ship.shoot();
 		window.clear();
 		ship.draw(window);
-		terraforming(window,rightorleft);
-		draw(window);
 		ship.drawBullets(window);
+		terraforming(window, rightorleft);
+		draw(window);
 		window.display();
 	}
 	return 0;

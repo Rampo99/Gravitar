@@ -96,6 +96,7 @@ int SolarSystem::Run(sf::RenderWindow &window)
 		ship.shoot();
 		window.clear();
 		ship.draw(window);
+		ship.drawBullets(window);
 		if(alfacheck)
 			window.draw(alfa);
 		if(betacheck)
@@ -104,7 +105,6 @@ int SolarSystem::Run(sf::RenderWindow &window)
 			window.draw(gamma);
 		if(omegacheck)
 			window.draw(omega);
-		ship.drawBullets(window);
 		if (checkcollide() != 0) {  // checkcollide must be != 0 cause 0 is value of no-collision
 			ship.reset();
 			return checkcollide();
