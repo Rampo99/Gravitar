@@ -1,27 +1,36 @@
 #include "Bunker.h"
 
+
 Bunker::Bunker() {
 	isdraw = false;
 	firespeed = 0;
 	turrets = 0;
 }
 
-void Bunker::settype(int a){
-	switch(a){
-			case 1:
-				turrets = 1;
-				firespeed = 1.5;
-			break;
-			case 2:
-				turrets = 2;
-				firespeed = 1;
-			break;
-		}
+
+void Bunker::settype(int a)
+{
+	switch (a) {
+	case 1:
+		turrets = 1;
+		firespeed = 1.5;
+		break;
+	case 2:
+		turrets = 2;
+		firespeed = 1;
+		break;
+	}
 }
-void Bunker::rotation(double x){
+
+
+void Bunker::rotation(double x)
+{
 	bunker.rotate(x);
 }
-void Bunker::drawing(){
+
+
+void Bunker::drawing()
+{
 	bunker.setFillColor(sf::Color(255,255,255));
 	bunker.setPointCount(20);
 	bunker.setOrigin(135,250);
@@ -47,10 +56,15 @@ void Bunker::drawing(){
 	bunker.setPoint(19, sf::Vector2f(110,100));
 	isdraw = true;
 }
-void Bunker::position(int x, int y){
+
+
+void Bunker::position(int x, int y)
+{
 	bunker.setPosition(x,y);
 }
-void Bunker::draw(sf::RenderWindow& w){
+
+
+void Bunker::draw(sf::RenderWindow& w)
+{
 	w.draw(bunker);
 }
-

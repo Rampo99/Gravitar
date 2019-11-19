@@ -9,22 +9,28 @@
 #include <ctime>
 #include <math.h>
 
-#ifndef GAME_H_
-#define GAME_H_
 
-struct BunkerList{
+#ifndef GAME_H
+#define GAME_H
+
+
+struct BunkerList {
 	Bunker bunker;
 	BunkerList *next;
 	BunkerList *prev;
 };
-struct FuelList{
+
+
+struct FuelList {
 	Fuel fuel;
 	FuelList *next;
 	FuelList *prev;
 };
 
+
 typedef BunkerList *ptrbunkers;
 typedef FuelList *ptrfuels;
+
 
 struct LinesList{
 	sf::VertexArray lines;
@@ -32,11 +38,15 @@ struct LinesList{
 	ptrfuels Fuels;
 	LinesList *next;
 	LinesList *prev;
-	bool isdraw = false; //this is a bool check to prevent terraforming if it's already done
+	bool isdraw = false;  // this is a bool check to prevent terraforming if it's already done
 };
+
+
 typedef LinesList *ptrlines;
 
+
 class Game : public Screen{
+
 public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
@@ -49,11 +59,12 @@ public:
 	ptrlines Lines;
 	unsigned int x = 0,y = 0;
 	bool setup = true;
+
 private:
-	list<Bullet*> bullets;
-	list<Bullet*>::iterator it;
 	int bunkers;
 	int fuels;
+
 };
+
 
 #endif

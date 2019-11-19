@@ -6,15 +6,16 @@ using namespace std;
 using namespace sf;
 
 
-int main(){
+int main()
+{
 	std::vector<Screen*> Screens;
 	int screen = 0;
 	ContextSettings settings;
-	settings.antialiasingLevel = 8;
-	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
+	settings.antialiasingLevel = 16;
+	RenderWindow window(VideoMode(900, 900), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
-	ship.setposition(window.getSize().x/2,window.getSize().y/2);
+	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
 	SolarSystem* solarsystem = new SolarSystem;
@@ -26,13 +27,13 @@ int main(){
 	game->setnFuels(fuels);
 	game->setShip(ship);
 	Screens.push_back(game);
-
-	while (screen >= 0){
-		if(screen == 2) menu.setreturnint(screen);
-		if(screen == 1) menu.setreturnint(screen);
-
+	while (screen >= 0) {
+		if (screen == 2)
+			menu.setreturnint(screen);
+		if(screen == 1)
+			menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
-		if(screen == 3){
+		if (screen == 3) {
 			bunkers++;
 			fuels++;
 			cout << "dioporco";
@@ -44,7 +45,7 @@ int main(){
 			game->setnFuels(fuels);
 			game->setShip(ship);
 			Screens[2] = game;
-			if(solarsystem->check()){
+			if (solarsystem->check()) {
 				delete solarsystem;
 				solarsystem = NULL;
 				solarsystem = new SolarSystem;
@@ -53,23 +54,21 @@ int main(){
 			}
 			screen = 1;
 		}
-		if(screen == 4){
+		if (screen == 4) {
 			solarsystem->alfacheck = false;
 			screen = 2;
 		}
-		if(screen == 5){
+		if (screen == 5) {
 			solarsystem->betacheck = false;
 			screen = 2;
 		}
-		if(screen == 6){
+		if (screen == 6) {
 			solarsystem->omegacheck = false;
 			screen = 2;
 		}
-		if(screen == 7){
+		if (screen == 7) {
 			solarsystem->gammacheck = false;
 			screen = 2;
 		}
 	}
-
 }
-

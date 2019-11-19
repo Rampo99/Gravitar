@@ -1,11 +1,16 @@
-#ifndef Screen_H_
-#define Screen_H_
+#ifndef Screen_H
+#define Screen_H
+
 
 #include <SFML/Graphics.hpp>
 
+
 class Screen {
+
 public :
-    virtual int Run (sf::RenderWindow &App) = 0;
+	virtual int Run (sf::RenderWindow &App) = 0;
+
 };
+
 
 #endif

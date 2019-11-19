@@ -1,9 +1,12 @@
-#ifndef FUEL_H_
-#define FUEL_H_
+#ifndef FUEL_H
+#define FUEL_H
+
 
 #include <SFML/Graphics.hpp>
 
+
 class Fuel {
+
 public:
 	Fuel();
 	void draw(sf::RenderWindow& w);
@@ -11,9 +14,12 @@ public:
 	void position(int x, int y);
 	void rotation(double x);
 	bool isdraw;
+
 private:
 	sf::ConvexShape benza;
 	int value;
+
 };
+
 
 #endif

@@ -54,4 +54,3 @@ void Bullet::draw(RenderWindow& window)
 {
 	window.draw(bullet);
 }
-

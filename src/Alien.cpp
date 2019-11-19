@@ -1,5 +1,6 @@
 #include "Alien.h"
 
+
 Alien::Alien() {
 	alien.setFillColor(sf::Color(255,255,255));
 	alien.setPointCount(12);
@@ -17,8 +18,10 @@ Alien::Alien() {
 	alien.setPoint(11, sf::Vector2f(150,100));
 }
 
+
 Alien::~Alien() {
 }
+
 
 void Alien::draw(sf::RenderWindow& w){
 	w.draw(alien);

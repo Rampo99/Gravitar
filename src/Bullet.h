@@ -22,6 +22,7 @@ public:
 	void move();
 	bool isAlive(RenderWindow& window);
 	void draw(RenderWindow& window);
+
 };
 
 

@@ -40,9 +40,13 @@ Spaceship::Spaceship()
 	for_shooting = seconds(ratio);
 }
 
-void Spaceship::reset(){
+
+void Spaceship::reset()
+{
 	move_left = move_up = move_right = move_down = shooting = false;
 }
+
+
 void Spaceship::direction(Event event)
 {
 	switch (event.type) {
@@ -111,17 +115,27 @@ void Spaceship::ifShooting(Event event)
 	if (event.type == Event::KeyReleased && event.key.code == Keyboard::L)
 		shooting = false;
 }
-void Spaceship::setposition(int x, int y){
+
+
+void Spaceship::setposition(int x, int y)
+{
 	ship.setPosition(x,y);
 }
-double Spaceship::getx(){
+
+
+double Spaceship::getx()
+{
 	return ship.getPosition().x;
 }
 
-double Spaceship::gety(){
+
+double Spaceship::gety()
+{
 	return ship.getPosition().y;
 }
-void Spaceship::shoot(list<Bullet*>& bullets)
+
+
+void Spaceship::shoot()
 {
 	double x = ship.getPosition().x, y = ship.getPosition().y;
 	for_shooting += clock_canshoot.restart();
@@ -145,6 +159,24 @@ void Spaceship::shoot(list<Bullet*>& bullets)
 	}
 }
 
+
+void Spaceship::drawBullets(RenderWindow& window)
+{
+	list<Bullet*>::iterator it;
+	for(it = bullets.begin(); it != bullets.end(); ) {
+		(*it)->move();
+		if ((*it)->isAlive(window)) {
+			(*it)->draw(window);
+			it++;
+		}
+		else {
+			delete *it;
+			it = bullets.erase(it);
+		}
+	}
+}
+
+
 int Spaceship::move(RenderWindow& window)
 {
 	Time elapsed = clock_move.restart();
@@ -167,16 +199,16 @@ int Spaceship::move(RenderWindow& window)
 
 	if (getx() < 0) {
 		ship.setPosition(window.getSize().x, gety());
-		return -1; //spaceship is going over left-window border
+		return -1;  // spaceship is going over left-window border
 	}
 	else if (getx() > window.getSize().x) {
 		ship.setPosition(0, gety());
-		return 1; //spaceship is going over right-window border
+		return 1;  // spaceship is going over right-window border
 	}
-	return 0; //spaceship moving in-window bounds.
+	return 0;  // spaceship moving in-window bounds.
 }
+
 
 void Spaceship::draw(RenderWindow& window){
 	window.draw(ship);
 }
-
