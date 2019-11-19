@@ -209,6 +209,7 @@ int Spaceship::move(RenderWindow& window)
 }
 
 
-void Spaceship::draw(RenderWindow& window){
+void Spaceship::draw(RenderWindow& window)
+{
 	window.draw(ship);
 }
