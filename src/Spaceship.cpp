@@ -18,22 +18,22 @@ Spaceship::Spaceship()
 	ship.setOutlineColor(Color::Magenta);
 	ship.setOutlineThickness(2);
 	ship.setPoint(0, Vector2f(0, 0));
-	ship.setPoint(1, Vector2f(7, 14));
-	ship.setPoint(2, Vector2f(0, 28));
-	ship.setPoint(3, Vector2f(7, 42));
-	ship.setPoint(4, Vector2f(0, 56));
-	ship.setPoint(5, Vector2f(14, 49));
-	ship.setPoint(6, Vector2f(28, 56));
-	ship.setPoint(7, Vector2f(42, 49));
-	ship.setPoint(8, Vector2f(56, 56));
-	ship.setPoint(9, Vector2f(49, 42));
-	ship.setPoint(10, Vector2f(56, 28));
-	ship.setPoint(11, Vector2f(49, 14));
-	ship.setPoint(12, Vector2f(56, 0));
-	ship.setPoint(13, Vector2f(42, 7));
-	ship.setPoint(14, Vector2f(28, 0));
-	ship.setPoint(15, Vector2f(14, 7));
-	ship.setOrigin(28, 28);
+	ship.setPoint(1, Vector2f(5, 10));
+	ship.setPoint(2, Vector2f(0, 20));
+	ship.setPoint(3, Vector2f(5, 30));
+	ship.setPoint(4, Vector2f(0, 40));
+	ship.setPoint(5, Vector2f(10, 35));
+	ship.setPoint(6, Vector2f(20, 40));
+	ship.setPoint(7, Vector2f(30, 35));
+	ship.setPoint(8, Vector2f(40, 40));
+	ship.setPoint(9, Vector2f(35, 30));
+	ship.setPoint(10, Vector2f(40, 20));
+	ship.setPoint(11, Vector2f(35, 10));
+	ship.setPoint(12, Vector2f(40, 0));
+	ship.setPoint(13, Vector2f(30, 5));
+	ship.setPoint(14, Vector2f(20, 0));
+	ship.setPoint(15, Vector2f(10, 5));
+	ship.setOrigin(20, 20);
 	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 400;
 	ratio = 1.0 / 3.0;
@@ -142,13 +142,13 @@ void Spaceship::shoot()
 	if (shooting && for_shooting.asSeconds() >= ratio) {
 		Bullet **tmp = new Bullet*;
 		if (move_left)
-			x -= 28;
+			x -= 20;
 		if (move_up)
-			y -= 28;
+			y -= 20;
 		if (move_right)
-			x += 28;
+			x += 20;
 		if (move_down)
-			y += 28;
+			y += 20;
 		if (!(move_left || move_up || move_right || move_down))
 			*tmp = new Bullet(x, y + 28, false, false, false, true);
 		else {
