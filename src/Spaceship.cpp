@@ -151,7 +151,7 @@ void Spaceship::shoot()
   if (move_down)
    y += 20;
   if (!(move_left || move_up || move_right || move_down))
-   *tmp = new Bullet(x, y + 28, false, false, false, true);
+   *tmp = new Bullet(x, y + 20, false, false, false, true);
   else {
    *tmp = new Bullet(x, y, move_left, move_up, move_right, move_down);
   }
