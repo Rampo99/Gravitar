@@ -61,9 +61,11 @@ public:
 	bool setup = true;
 
 private:
+	ptrlines sxpointer;
+	ptrlines dxpointer;
 	int bunkers;
 	int fuels;
-
+	bool fullview;
 };
 
 

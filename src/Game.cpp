@@ -14,6 +14,9 @@ Game::Game()
 	Lines->Fuels = new FuelList;
 	bunkers = 0;
 	fuels = 0;
+	sxpointer = Lines;
+	dxpointer = Lines;
+	fullview = false;
 }
 
 
@@ -71,6 +74,16 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 	 * 1 if ship goes over right-window border
 	 * -1 if ship goes over left-window border
 	 * (check spaceship::move function) */
+	if(fuels == 0 and bunkers == 0 and !fullview){
+		if (Lines->next == NULL){
+			Lines->next = sxpointer;
+			sxpointer->prev = Lines;
+		} else {
+			Lines->prev = dxpointer;
+			dxpointer->next = Lines;
+		}
+		fullview = true;
+	}
 	if (rightorleft == 1) {
 		if (Lines->next == NULL) {
 			Lines->next = new LinesList;
@@ -80,8 +93,8 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			Lines->next->next = NULL;
 		}
 		Lines = Lines->next;
-	}
-	else if (rightorleft == -1) {
+		if(fuels != 0 or bunkers != 0) dxpointer = Lines;
+	} else if (rightorleft == -1) {
 		if (Lines->prev == NULL) {
 			Lines->prev = new LinesList;
 			Lines->prev->next = Lines;
@@ -90,7 +103,9 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			Lines->prev->prev = NULL;
 		}
 		Lines = Lines->prev;
+		if(fuels != 0 or bunkers != 0) sxpointer = Lines;
 	}
+
 	if (Lines->isdraw == false) {
 		Lines->isdraw = true;
 		x = 0;
@@ -131,7 +146,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 				finaly = -(y-y2);
 			else
 				finaly = y-y2;
-			if (percfuel < 2) {
+			if (percfuel < 10) {
 				if (fuels > 0) {
 					f->fuel.settype(fueltype);
 					if (fueltype == 2)
@@ -151,7 +166,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 					fuels--;
 				}
 			}
-			else if (percbunker < 2) {
+			else if (percbunker < 10) {
 				if (bunkers > 0) {
 					b->bunker.settype(bunkertype);
 					if (bunkertype == 2)
