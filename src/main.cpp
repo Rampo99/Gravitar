@@ -11,8 +11,8 @@ int main()
 	std::vector<Screen*> Screens;
 	int screen = 0;
 	ContextSettings settings;
-	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(900, 900), "Gravitar", Style::Default, settings);
+	settings.antialiasingLevel = 8;
+	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);

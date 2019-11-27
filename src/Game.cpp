@@ -112,10 +112,10 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			int fueltype = 1;
 			int bunkertype = 1;
 			y2 = y;
-			if (x == w.getSize().x - 20)
-				x += 19;
+			if (x == w.getSize().x - 40)
+				x += 39;
 			else
-				x += 20;
+				x += 40;
 			if (y != w.getSize().y - 20) {
 				if (perclines < 30) {
 					if (y > 20)
@@ -138,12 +138,12 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 						fueltype --;
 					else
 						fueltype++;
-					f->fuel.position(x-10,y-finaly/2);
+					f->fuel.position(x-20,y-finaly/2);
 					if (y != y2) {
 						if (y<y2)
-							f->fuel.rotation(atan2(20,finaly) * 180 / 3.141592 + 180);
+							f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592 + 180);
 						else
-							f->fuel.rotation(atan2(20,finaly) * 180 / 3.141592);
+							f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592);
 					}
 					f->next = new FuelList;
 					f->next->prev = f;
@@ -158,12 +158,12 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 						bunkertype--;
 					else
 						bunkertype++;
-					b->bunker.position(x - 10, y - finaly / 2);
+					b->bunker.position(x - 20, y - finaly / 2);
 					if (y != y2) {
 						if (y < y2)
-							b->bunker.rotation(atan2(20,finaly)*180 / 3.141592 +180);
+							b->bunker.rotation(atan2(10,finaly)*180 / 3.141592 +180);
 						else
-							b->bunker.rotation(atan2(20,finaly)*180 / 3.141592);
+							b->bunker.rotation(atan2(10,finaly)*180 / 3.141592);
 					}
 					b->bunker.drawing();
 					b->next = new BunkerList;
