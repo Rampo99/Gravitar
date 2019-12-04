@@ -25,6 +25,9 @@ void Game::setnBunkers(int n)
 	bunkers = n;
 }
 
+Spaceship Game::returnship(){
+	return ship;
+}
 
 void Game::setnFuels(int n)
 {

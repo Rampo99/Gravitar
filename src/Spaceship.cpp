@@ -134,7 +134,18 @@ double Spaceship::gety()
 {
  return ship.getPosition().y;
 }
-
+void Spaceship::addlife(){
+	lifes +=  1;
+}
+void Spaceship::removelife(){
+	lifes -= 1;
+}
+void Spaceship::increasefuel(){
+	fuellvl += 25;
+}
+void Spaceship::increasescore(int a){
+	score += a;
+}
 
 void Spaceship::shoot()
 {

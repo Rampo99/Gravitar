@@ -28,24 +28,24 @@ int main()
 	game->setShip(ship);
 	Screens.push_back(game);
 	while (screen >= 0) {
-		if (screen == 2)
-			menu.setreturnint(screen);
-		if(screen == 1)
-			menu.setreturnint(screen);
+		if (screen == 2) menu.setreturnint(screen);
+		if (screen == 1)	menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
 		if (screen == 3) {
+			ship = game->returnship();
+			ship.increasescore(20);
 			bunkers++;
 			fuels++;
-			cout << "dioporco";
 			delete game;
 			game = NULL;
 			game = new Game;
-			cout << "ciao";
 			game->setnBunkers(bunkers);
 			game->setnFuels(fuels);
 			game->setShip(ship);
 			Screens[2] = game;
 			if (solarsystem->check()) {
+				ship.addlife();
+				ship.increasescore(100);
 				delete solarsystem;
 				solarsystem = NULL;
 				solarsystem = new SolarSystem;

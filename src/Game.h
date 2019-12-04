@@ -51,6 +51,7 @@ public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
 	Spaceship ship;
+	Spaceship returnship();
 	void setShip(Spaceship& s); //Set ship from main
 	void setnBunkers(int n); //set number of bunkers for current game
 	void setnFuels(int n); //set number of fuels for current game

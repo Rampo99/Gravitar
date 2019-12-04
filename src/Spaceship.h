@@ -22,6 +22,13 @@ private:
 	Time for_shooting;
 
 public:
+	int score = 0;
+	int lifes = 3;
+	double fuellvl = 100;
+	void increasefuel();
+	void addlife();
+	void increasescore(int a);
+	void removelife();
 	Spaceship();
 	void setposition(int x, int y);
 	void direction(Event event);
