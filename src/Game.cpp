@@ -17,6 +17,9 @@ Game::Game()
 	sxpointer = Lines;
 	dxpointer = Lines;
 	fullview = false;
+	nothingtodraw = false;
+	lastx = 0;
+	lasty = 0;
 }
 
 
@@ -74,6 +77,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		if (Lines->next == NULL){
 			Lines->next = sxpointer;
 			sxpointer->prev = Lines;
+			lastx = sxpointer->lines;
 		} else {
 			Lines->prev = dxpointer;
 			dxpointer->next = Lines;
@@ -184,6 +188,9 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 					b = b->next;
 					bunkers--;
 				}
+			}
+			if(bunkers == 0 and fuels == 0){
+				nothingtodraw = true;
 			}
 			if (x == w.getSize().x - 1)
 				x++;
