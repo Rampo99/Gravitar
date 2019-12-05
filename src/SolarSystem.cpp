@@ -7,37 +7,30 @@ SolarSystem::SolarSystem()
 	sf::CircleShape beta;
 	sf::CircleShape gamma;
 	sf::CircleShape omega;
-	//Spaceship ship;
-}
-
-
-void SolarSystem::setShip(Spaceship& s)
-{
-	ship = s;
 }
 
 
 void SolarSystem::setupPlanets()
 {
 	if (alfacheck) {
-		alfa.setOrigin(10, 10);
-		alfa.setPosition(100, 100);
 		alfa.setRadius(20);
+		alfa.setOrigin(20, 20);
+		alfa.setPosition(100, 100);
 	}
 	if (betacheck) {
-		beta.setOrigin(10, 10);
-		beta.setPosition(100, 500);
 		beta.setRadius(20);
+		beta.setOrigin(20, 20);
+		beta.setPosition(100, 500);
 	}
 	if (gammacheck) {
-		gamma.setOrigin(10, 10);
-		gamma.setPosition(500, 100);
 		gamma.setRadius(20);
+		gamma.setOrigin(20, 20);
+		gamma.setPosition(500, 100);
 	}
 	if (omegacheck) {
-		omega.setOrigin(10, 10);
-		omega.setPosition(500, 500);
 		omega.setRadius(20);
+		omega.setOrigin(20, 20);
+		omega.setPosition(500, 500);
 	}
 }
 
@@ -105,9 +98,9 @@ int SolarSystem::Run(sf::RenderWindow &window)
 			window.draw(gamma);
 		if(omegacheck)
 			window.draw(omega);
-		if (checkcollide() != 0) {  // checkcollide must be != 0 cause 0 is value of no-collision
-			ship.reset();
-			return checkcollide();
+		int tmp;
+		if ((tmp = checkcollide()) != 0) {  // checkcollide must be != 0 cause 0 is value of no-collision
+			return tmp;
 		}
 		window.display();
 	}

@@ -1,5 +1,5 @@
-
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <math.h>
 #include <list>
 #include "Spaceship.h"
@@ -37,31 +37,38 @@ Spaceship::Spaceship()
 	ship.setOrigin(20, 20);
 	health = 5;
 	double l = 25;  // l lato quadrato cuore
-	for (int h = 0; h < health; h++) {
-		hearts[h] = ConvexShape(8);
-		hearts[h].setFillColor(Color::Red);
-		hearts[h].setOutlineColor(Color(200, 0, 0));
-		hearts[h].setOutlineThickness(2);
-		hearts[h].setPoint(0, Vector2f((1.0 / 4) * l, 0));
-		hearts[h].setPoint(1, Vector2f(0, (1.0 / 3) * l));
-		hearts[h].setPoint(2, Vector2f(0, (1.0 / 2) * l));
-		hearts[h].setPoint(3, Vector2f((1.0 / 2) * l, l));
-		hearts[h].setPoint(4, Vector2f(l, (1.0 / 2) * l));
-		hearts[h].setPoint(5, Vector2f(l, (1.0 / 3) * l));
-		hearts[h].setPoint(6, Vector2f((3.0 / 4) * l, 0));
-		hearts[h].setPoint(7, Vector2f((1.0 / 2) * l, (1.0 / 3) * l));
-		hearts[h].setPosition(h * l + 10 + 10 * h, 10);
-	}
+	heart = ConvexShape(8);
+	heart.setFillColor(Color::Red);
+	heart.setOutlineColor(Color(90, 0, 0));
+	heart.setOutlineThickness(2);
+	heart.setPoint(0, Vector2f((1.0 / 4) * l, 3));
+	heart.setPoint(1, Vector2f(0, (1.0 / 3) * l));
+	heart.setPoint(2, Vector2f(0, (1.0 / 2) * l));
+	heart.setPoint(3, Vector2f((1.0 / 2) * l, l));
+	heart.setPoint(4, Vector2f(l, (1.0 / 2) * l));
+	heart.setPoint(5, Vector2f(l, (1.0 / 3) * l));
+	heart.setPoint(6, Vector2f((3.0 / 4) * l, 3));
+	heart.setPoint(7, Vector2f((1.0 / 2) * l, (1.0 / 3) * l));
+	fuel_border = RectangleShape(Vector2f(185.0, 25.0));
+	fuel_border.setFillColor(Color::Black);
+	fuel_border.setOutlineColor(Color::Yellow);
+	fuel_border.setOutlineThickness(2);
+	fuel_border.setPosition(403.5, 10);
+	fuel_bar = RectangleShape(Vector2f(180.0, 20.0));
+	fuel_bar.setFillColor(Color::Yellow);
+	fuel_bar.setPosition(406, 12.5);
 	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 400;
 	ratio = 1.0 / 3.0;
 	for_shooting = seconds(ratio);
+	fuel_bar_time = seconds(15);
 }
 
 
 void Spaceship::reset()
 {
 	move_left = move_up = move_right = move_down = shooting = false;
+	//ship.setPosition(300, 300);
 }
 
 
@@ -123,6 +130,10 @@ void Spaceship::direction(Event event)
 			default:
 				break;
 	}
+	if (move_left || move_right || move_up || move_down)
+		fuel_bar_time -= drain_fuel.restart();
+	else
+		drain_fuel.restart();
 }
 
 
@@ -135,9 +146,9 @@ void Spaceship::ifShooting(Event event)
 }
 
 
-void Spaceship::setposition(int x, int y)
+void Spaceship::setposition(double x, double y)
 {
-	ship.setPosition(x,y);
+	ship.setPosition(x, y);
 }
 
 
@@ -232,6 +243,12 @@ void Spaceship::draw(RenderWindow& window)
 {
 	window.draw(ship);
 	for (int h = 0; h < health; h++) {
-		window.draw(hearts[h]);
+		heart.setPosition(h * 25 + 10 + 10 * h, 7);
+		window.draw(heart);
 	}
+	window.draw(fuel_border);
+	double x = 180 * (fuel_bar_time.asSeconds() / 15);
+	x = x < 0 ? 0 : x;
+	fuel_bar.setSize(Vector2f(x, fuel_bar.getSize().y));
+	window.draw(fuel_bar);
 }

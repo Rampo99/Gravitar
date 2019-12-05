@@ -14,24 +14,25 @@ using namespace sf;
 class Spaceship {
 
 private:
-	ConvexShape ship, hearts[5];
+	ConvexShape ship, heart;
+	RectangleShape fuel_border, fuel_bar;
 	bool move_left, move_up, move_right, move_down, shooting;
 	double speed, ratio;
 	int health;
 	list<Bullet*> bullets;
-	Clock clock_move, clock_canshoot;
-	Time for_shooting;
+	Clock clock_move, clock_canshoot, drain_fuel;
+	Time for_shooting, fuel_bar_time;
 
 public:
 	int score = 0;
 	int lifes = 3;
 	double fuellvl = 100;
-	void increasefuel();
-	void addlife();
-	void increasescore(int a);
-	void removelife();
+	//void increasefuel();
+	//void addlife();
+	//void increasescore(int a);
+	//void removelife();
 	Spaceship();
-	void setposition(int x, int y);
+	void setposition(double x, double y);
 	void direction(Event event);
 	void ifShooting(Event event);
 	void reset(); //reset spaceship movements to prevent run-time bugs.
@@ -43,6 +44,9 @@ public:
 	double gety();
 
 };
+
+
+extern Spaceship ship;
 
 
 #endif  // SPACESHIP_H

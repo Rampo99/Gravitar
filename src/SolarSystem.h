@@ -16,7 +16,6 @@ public:
 	SolarSystem();
 	virtual int Run(sf::RenderWindow &App);
 	void setupPlanets();  // setup solarsystem planets (solarsystem view)
-	void setShip(Spaceship& s);  // set spaceship from main
 	int checkcollide();  // checks if spaceship collides a planet
 	bool check();  // checks if planets are already completed
 	bool alfacheck = true;
@@ -29,7 +28,6 @@ private:
 	sf::CircleShape beta;
 	sf::CircleShape gamma;
 	sf::CircleShape omega;
-	Spaceship ship;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
 

@@ -1,9 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Screens.h"
 #include "Spaceship.h"
+#include <iostream>
+
+
 using namespace std;
 using namespace sf;
+
+
+Spaceship ship;
 
 
 int main()
@@ -14,25 +19,23 @@ int main()
 	settings.antialiasingLevel = 16;
 	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
-	Spaceship ship;
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
 	SolarSystem* solarsystem = new SolarSystem;
-	solarsystem->setShip(ship);
 	Screens.push_back(solarsystem);
 	int bunkers = 2, fuels = 1;
 	Game* game = new Game;
 	game->setnBunkers(bunkers);
 	game->setnFuels(fuels);
-	game->setShip(ship);
 	Screens.push_back(game);
 	while (screen >= 0) {
-		if (screen == 2) menu.setreturnint(screen);
-		if (screen == 1)	menu.setreturnint(screen);
+		if (screen == 2)
+			menu.setreturnint(screen);
+		if (screen == 1)
+			menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
 		if (screen == 3) {
-			ship = game->returnship();
 			//ship.increasescore(20);
 			bunkers++;
 			fuels++;
@@ -41,7 +44,6 @@ int main()
 			game = new Game;
 			game->setnBunkers(bunkers);
 			game->setnFuels(fuels);
-			game->setShip(ship);
 			Screens[2] = game;
 			if (solarsystem->check()) {
 				//ship.addlife();
@@ -49,25 +51,28 @@ int main()
 				delete solarsystem;
 				solarsystem = NULL;
 				solarsystem = new SolarSystem;
-				solarsystem->setShip(ship);
 				Screens[1] = solarsystem;
 			}
 			screen = 1;
 		}
 		if (screen == 4) {
 			solarsystem->alfacheck = false;
+			ship.setposition(300, 100);
 			screen = 2;
 		}
 		if (screen == 5) {
 			solarsystem->betacheck = false;
+			ship.setposition(300, 100);
 			screen = 2;
 		}
 		if (screen == 6) {
 			solarsystem->omegacheck = false;
+			ship.setposition(300, 100);
 			screen = 2;
 		}
 		if (screen == 7) {
 			solarsystem->gammacheck = false;
+			ship.setposition(300, 100);
 			screen = 2;
 		}
 	}

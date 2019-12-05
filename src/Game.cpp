@@ -25,19 +25,10 @@ void Game::setnBunkers(int n)
 	bunkers = n;
 }
 
-Spaceship Game::returnship(){
-	return ship;
-}
 
 void Game::setnFuels(int n)
 {
 	fuels = n;
-}
-
-
-void Game::setShip(Spaceship& s)
-{
-	ship = s;
 }
 
 
@@ -53,8 +44,10 @@ int Game::Run(sf::RenderWindow &window)
 			if (event.type == Event::KeyPressed) {
 				if (event.key.code == Keyboard::Escape)
 					return 0;
-				if (event.key.code == Keyboard::K)
+				if (event.key.code == Keyboard::K) {
+					ship.setposition(300, 300);
 					return 3;
+				}
 			}
 			ship.direction(event);
 			ship.ifShooting(event);
