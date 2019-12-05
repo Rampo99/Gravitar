@@ -58,21 +58,25 @@ int main()
 		if (screen == 4) {
 			solarsystem->alfacheck = false;
 			ship.setposition(300, 100);
+			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 5) {
 			solarsystem->betacheck = false;
 			ship.setposition(300, 100);
+			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 6) {
 			solarsystem->omegacheck = false;
 			ship.setposition(300, 100);
+			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 7) {
 			solarsystem->gammacheck = false;
 			ship.setposition(300, 100);
+			ship.clearBullets();
 			screen = 2;
 		}
 	}

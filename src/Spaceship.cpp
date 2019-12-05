@@ -252,3 +252,8 @@ void Spaceship::draw(RenderWindow& window)
 	fuel_bar.setSize(Vector2f(x, fuel_bar.getSize().y));
 	window.draw(fuel_bar);
 }
+
+
+void Spaceship::clearBullets() {
+	bullets.clear();
+}

@@ -35,7 +35,6 @@ void Game::setnFuels(int n)
 int Game::Run(sf::RenderWindow &window)
 {
 	// 3 is the int value of planet-completed
-	cout << "bunkers: " << bunkers << "  Fuels: " << fuels;
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -46,6 +45,7 @@ int Game::Run(sf::RenderWindow &window)
 					return 0;
 				if (event.key.code == Keyboard::K) {
 					ship.setposition(300, 300);
+					ship.clearBullets();
 					return 3;
 				}
 			}
@@ -81,6 +81,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		fullview = true;
 	}
 	if (rightorleft == 1) {
+		ship.clearBullets();
 		if (Lines->next == NULL) {
 			Lines->next = new LinesList;
 			Lines->next->prev = Lines;
@@ -91,6 +92,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		Lines = Lines->next;
 		if(fuels != 0 or bunkers != 0) dxpointer = Lines;
 	} else if (rightorleft == -1) {
+		ship.clearBullets();
 		if (Lines->prev == NULL) {
 			Lines->prev = new LinesList;
 			Lines->prev->next = Lines;

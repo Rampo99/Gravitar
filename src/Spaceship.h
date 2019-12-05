@@ -42,6 +42,7 @@ public:
 	void draw(RenderWindow& window);
 	double getx();
 	double gety();
+	void clearBullets();
 
 };
 
