@@ -7,7 +7,7 @@ SolarSystem::SolarSystem()
 	sf::CircleShape beta;
 	sf::CircleShape gamma;
 	sf::CircleShape omega;
-	Spaceship ship;
+	//Spaceship ship;
 }
 
 
@@ -20,23 +20,23 @@ void SolarSystem::setShip(Spaceship& s)
 void SolarSystem::setupPlanets()
 {
 	if (alfacheck) {
-		alfa.setOrigin(10,10);
-		alfa.setPosition(100,100);
+		alfa.setOrigin(10, 10);
+		alfa.setPosition(100, 100);
 		alfa.setRadius(20);
 	}
 	if (betacheck) {
-		beta.setOrigin(10,10);
-		beta.setPosition(100,500);
+		beta.setOrigin(10, 10);
+		beta.setPosition(100, 500);
 		beta.setRadius(20);
 	}
 	if (gammacheck) {
-		gamma.setOrigin(10,10);
-		gamma.setPosition(500,100);
+		gamma.setOrigin(10, 10);
+		gamma.setPosition(500, 100);
 		gamma.setRadius(20);
 	}
 	if (omegacheck) {
-		omega.setOrigin(10,10);
-		omega.setPosition(500,500);
+		omega.setOrigin(10, 10);
+		omega.setPosition(500, 500);
 		omega.setRadius(20);
 	}
 }

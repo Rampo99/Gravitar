@@ -14,9 +14,10 @@ using namespace sf;
 class Spaceship {
 
 private:
-	ConvexShape ship;
+	ConvexShape ship, hearts[5];
 	bool move_left, move_up, move_right, move_down, shooting;
 	double speed, ratio;
+	int health;
 	list<Bullet*> bullets;
 	Clock clock_move, clock_canshoot;
 	Time for_shooting;

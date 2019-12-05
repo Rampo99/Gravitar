@@ -11,7 +11,7 @@ int main()
 	std::vector<Screen*> Screens;
 	int screen = 0;
 	ContextSettings settings;
-	settings.antialiasingLevel = 8;
+	settings.antialiasingLevel = 16;
 	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	Spaceship ship;
@@ -33,7 +33,7 @@ int main()
 		screen = Screens[screen]->Run(window);
 		if (screen == 3) {
 			ship = game->returnship();
-			ship.increasescore(20);
+			//ship.increasescore(20);
 			bunkers++;
 			fuels++;
 			delete game;
@@ -44,8 +44,8 @@ int main()
 			game->setShip(ship);
 			Screens[2] = game;
 			if (solarsystem->check()) {
-				ship.addlife();
-				ship.increasescore(100);
+				//ship.addlife();
+				//ship.increasescore(100);
 				delete solarsystem;
 				solarsystem = NULL;
 				solarsystem = new SolarSystem;
