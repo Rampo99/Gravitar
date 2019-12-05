@@ -37,8 +37,8 @@ void Bunker::drawing()
 	bunker.setPoint(0, sf::Vector2f(100, 100));
 	bunker.setPoint(1, sf::Vector2f(100, 125));
 	bunker.setPoint(2, sf::Vector2f(105, 125));
-	bunker.setPoint(3, sf::Vector2f(105, 144));
-	bunker.setPoint(4, sf::Vector2f(130, 144));
+	bunker.setPoint(3, sf::Vector2f(105, 154));
+	bunker.setPoint(4, sf::Vector2f(130, 154));
 	bunker.setPoint(5, sf::Vector2f(130, 125));
 	bunker.setPoint(6, sf::Vector2f(135, 125));
 	bunker.setPoint(7, sf::Vector2f(135, 100));
