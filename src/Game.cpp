@@ -18,8 +18,7 @@ Game::Game()
 	dxpointer = Lines;
 	fullview = false;
 	nothingtodraw = false;
-	lastx = 0;
-	lasty = 0;
+	singlescreen = false;
 }
 
 
@@ -77,7 +76,6 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		if (Lines->next == NULL){
 			Lines->next = sxpointer;
 			sxpointer->prev = Lines;
-			lastx = sxpointer->lines;
 		} else {
 			Lines->prev = dxpointer;
 			dxpointer->next = Lines;
@@ -85,7 +83,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		fullview = true;
 	}
 	if (rightorleft == 1) {
-		ship.clearBullets();
+		if (!singlescreen) ship.clearBullets();
 		if (Lines->next == NULL) {
 			Lines->next = new LinesList;
 			Lines->next->prev = Lines;
@@ -94,9 +92,11 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			Lines->next->next = NULL;
 		}
 		Lines = Lines->next;
-		if(fuels != 0 or bunkers != 0) dxpointer = Lines;
+		if (fuels != 0 or bunkers != 0){
+			dxpointer = Lines;
+		}
 	} else if (rightorleft == -1) {
-		ship.clearBullets();
+		if (!singlescreen) ship.clearBullets();
 		if (Lines->prev == NULL) {
 			Lines->prev = new LinesList;
 			Lines->prev->next = Lines;
@@ -105,10 +105,13 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			Lines->prev->prev = NULL;
 		}
 		Lines = Lines->prev;
-		if(fuels != 0 or bunkers != 0) sxpointer = Lines;
+		if (fuels != 0 or bunkers != 0){
+			sxpointer = Lines;
+		}
 	}
 
 	if (Lines->isdraw == false) {
+		int p = 0;
 		Lines->isdraw = true;
 		x = 0;
 		if (setup) {
@@ -117,6 +120,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		}
 		unsigned int y2;
 		int finaly;
+		bool lastlinecheck = true;
 		ptrfuels f = Lines->Fuels;
 		ptrbunkers b = Lines->Bunkers;
 		Lines->lines.setPrimitiveType(sf::Lines);
@@ -129,10 +133,19 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 			int fueltype = 1;
 			int bunkertype = 1;
 			y2 = y;
-			if (x == w.getSize().x - 40)
+			if (x == w.getSize().x - 40){
 				x += 39;
-			else
+				if(Lines->next != NULL){
+					Lines->lines.append(sf::Vertex(sf::Vector2f(x,Lines->next->lines[0].position.y), sf::Color::Cyan));
+				}
+				if(nothingtodraw){
+					lastlinecheck = false;
+					if (Lines->next == NULL)	Lines->lines.append(sf::Vertex(sf::Vector2f(x,sxpointer->lines[0].position.y), sf::Color::Cyan));
+					else Lines->lines[0].position.y = dxpointer->lines[14].position.y;
+				}
+			} else {
 				x += 40;
+			}
 			if (y != w.getSize().y - 20) {
 				if (perclines < 30) {
 					if (y > 20)
@@ -140,57 +153,63 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 				}
 				else if (perclines >= 30 && perclines < 60)
 					y += 20;
-			}
-			else
-				y -= 20;
-			Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
+			} else y -= 20;
+			if (lastlinecheck) Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
 			if (y-y2 < 0)
 				finaly = -(y-y2);
 			else
 				finaly = y-y2;
-			if (percfuel < 10) {
-				if (fuels > 0) {
-					f->fuel.settype(fueltype);
-					if (fueltype == 2)
-						fueltype --;
-					else
-						fueltype++;
-					f->fuel.position(x-20,y-finaly/2);
-					if (y != y2) {
-						if (y<y2)
-							f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592 + 180);
-						else
-							f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592);
+			if(x>40 and x<= w.getSize().x - 40){
+				if(p == 0){
+					if (percfuel < 10) {
+						if (fuels > 0) {
+							f->fuel.settype(fueltype);
+							if (fueltype == 2)
+								fueltype --;
+							else
+								fueltype++;
+							f->fuel.position(x-20,y-finaly/2);
+							if (y != y2) {
+								if (y<y2)
+									f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592 + 180);
+								else
+									f->fuel.rotation(atan2(10,finaly) * 180 / 3.141592);
+							}
+							f->next = new FuelList;
+							f->next->prev = f;
+							f = f->next;
+							fuels--;
+						}
 					}
-					f->next = new FuelList;
-					f->next->prev = f;
-					f = f->next;
-					fuels--;
-				}
-			}
-			else if (percbunker < 10) {
-				if (bunkers > 0) {
-					b->bunker.settype(bunkertype);
-					if (bunkertype == 2)
-						bunkertype--;
-					else
-						bunkertype++;
-					b->bunker.position(x - 20, y - finaly / 2);
-					if (y != y2) {
-						if (y < y2)
-							b->bunker.rotation(atan2(10,finaly)*180 / 3.141592 +180);
-						else
-							b->bunker.rotation(atan2(10,finaly)*180 / 3.141592);
+					else if (percbunker < 10) {
+						if (bunkers > 0) {
+							b->bunker.settype(bunkertype);
+							if (bunkertype == 2)
+								bunkertype--;
+							else
+								bunkertype++;
+							b->bunker.position(x - 20, y - finaly / 2);
+							if (y != y2) {
+								if (y < y2)
+									b->bunker.rotation(atan2(10,finaly)*180 / 3.141592 +180);
+								else
+									b->bunker.rotation(atan2(10,finaly)*180 / 3.141592);
+							}
+							b->bunker.drawing();
+							b->next = new BunkerList;
+							b->next->prev = b;
+							b = b->next;
+							bunkers--;
+						}
 					}
-					b->bunker.drawing();
-					b->next = new BunkerList;
-					b->next->prev = b;
-					b = b->next;
-					bunkers--;
+					p++;
+				} else {
+					p--;
 				}
 			}
 			if(bunkers == 0 and fuels == 0){
 				nothingtodraw = true;
+				if(Lines->prev == NULL and Lines->next == NULL) singlescreen = true;
 			}
 			if (x == w.getSize().x - 1)
 				x++;

@@ -65,7 +65,7 @@ private:
 	int fuels;
 	bool fullview;
 	bool nothingtodraw;
-	double lastx, lasty;
+	bool singlescreen;
 };
 
 
