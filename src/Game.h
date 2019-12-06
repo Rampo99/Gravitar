@@ -64,6 +64,8 @@ private:
 	int bunkers;
 	int fuels;
 	bool fullview;
+	bool nothingtodraw;
+	bool singlescreen;
 };
 
 
