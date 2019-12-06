@@ -33,7 +33,7 @@ void Bunker::drawing()
 {
 	bunker.setFillColor(sf::Color::Blue);
 	bunker.setPointCount(20);
-	bunker.setOrigin(117.5,144);
+	bunker.setOrigin(117.5, 154);
 	bunker.setPoint(0, sf::Vector2f(100, 100));
 	bunker.setPoint(1, sf::Vector2f(100, 125));
 	bunker.setPoint(2, sf::Vector2f(105, 125));
