@@ -19,8 +19,10 @@ int main()
 	int screen = 0;
 	ContextSettings settings;
 	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1920, 1080), "Gravitar", Style::Fullscreen, settings);
+	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Fullscreen, settings);
 	window.setKeyRepeatEnabled(false);
+	window.setFramerateLimit(500);
+	window.setMouseCursorVisible(false);
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
