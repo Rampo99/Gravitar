@@ -3,6 +3,8 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "Bullet.h"
+#include <list>
 
 
 class Bunker {
@@ -14,12 +16,17 @@ public:
 	void position(int x, int y);
 	bool isdraw;
 	void drawing();
-	void rotation(double x);
+	void rotate(double x);
 
 private:
 	sf::ConvexShape bunker;
-	int health = 100, turrets;
-	float firespeed;
+	int health = 100;
+	list<Bullet*> bullets;
+	Time for_shooting;
+	Clock clock_canshoot;
+	double ratio, rot;
+	int type;
+	double *directions, *bullets_speed;
 
 };
 

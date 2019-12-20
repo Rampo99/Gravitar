@@ -37,7 +37,6 @@ public:
 	void ifShooting(Event event);
 	void reset(); //reset spaceship movements to prevent run-time bugs.
 	void shoot();
-	void drawBullets(RenderWindow& window);
 	int move(RenderWindow& window);
 	void draw(RenderWindow& window);
 	double getx();

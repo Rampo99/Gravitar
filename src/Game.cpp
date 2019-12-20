@@ -58,7 +58,6 @@ int Game::Run(sf::RenderWindow &window)
 		ship.shoot();
 		window.clear();
 		ship.draw(window);
-		ship.drawBullets(window);
 		terraforming(window, rightorleft);
 		draw(window);
 		window.display();
@@ -124,14 +123,13 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		ptrfuels f = Lines->Fuels;
 		ptrbunkers b = Lines->Bunkers;
 		Lines->lines.setPrimitiveType(sf::Lines);
-		srand(time(0));
 		while (x < w.getSize().x) {
 			Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
 			int perclines = (rand() % 100) + 1;
 			int percbunker = (rand() % 100) + 1;
 			int percfuel = (rand() % 100) + 1;
 			int fueltype = 1;
-			int bunkertype = 1;
+			int bunkertype = rand() % 2 + 2;
 			y2 = y;
 			if (x == w.getSize().x - 40){
 				x += 39;
@@ -161,7 +159,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 				finaly = y-y2;
 			if(x>40 and x<= w.getSize().x - 40){
 				if(p == 0){
-					if (percfuel < 10) {
+					if (percfuel < 12) {
 						if (fuels > 0) {
 							f->fuel.settype(fueltype);
 							if (fueltype == 2)
@@ -181,7 +179,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 							fuels--;
 						}
 					}
-					else if (percbunker < 10) {
+					else if (percbunker < 12) {
 						if (bunkers > 0) {
 							b->bunker.settype(bunkertype);
 							if (bunkertype == 2)
@@ -191,9 +189,9 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 							b->bunker.position(x - 20, y - finaly / 2);
 							if (y != y2) {
 								if (y < y2)
-									b->bunker.rotation(atan2(10,finaly)*180 / 3.141592 +180);
+									b->bunker.rotate(atan2(10,finaly)*180 / 3.141592 +180);
 								else
-									b->bunker.rotation(atan2(10,finaly)*180 / 3.141592);
+									b->bunker.rotate(atan2(10,finaly)*180 / 3.141592);
 							}
 							b->bunker.drawing();
 							b->next = new BunkerList;

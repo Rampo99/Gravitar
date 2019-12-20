@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Screens.h"
 #include "Spaceship.h"
+#include "cstdlib"
 #include <iostream>
 
 
@@ -13,11 +14,12 @@ Spaceship ship;
 
 int main()
 {
+	srand(time(0));
 	std::vector<Screen*> Screens;
 	int screen = 0;
 	ContextSettings settings;
 	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(600, 600), "Gravitar", Style::Default, settings);
+	RenderWindow window(VideoMode(900, 900), "Gravitar", Style::Default, settings);
 	window.setKeyRepeatEnabled(false);
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;

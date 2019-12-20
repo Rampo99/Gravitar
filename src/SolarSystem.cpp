@@ -89,7 +89,6 @@ int SolarSystem::Run(sf::RenderWindow &window)
 		ship.shoot();
 		window.clear();
 		ship.draw(window);
-		ship.drawBullets(window);
 		if(alfacheck)
 			window.draw(alfa);
 		if(betacheck)
