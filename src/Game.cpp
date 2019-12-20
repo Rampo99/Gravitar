@@ -46,7 +46,7 @@ int Game::Run(sf::RenderWindow &window)
 				if (event.key.code == Keyboard::Escape)
 					return 0;
 				if (event.key.code == Keyboard::K) {
-					ship.setposition(300, 300);
+					ship.setposition(450, 450);
 					ship.clearBullets();
 					return 3;
 				}
@@ -126,8 +126,8 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 		while (x < w.getSize().x) {
 			Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Cyan));
 			int perclines = (rand() % 100) + 1;
-			int percbunker = (rand() % 100) + 1;
-			int percfuel = (rand() % 100) + 1;
+			int percbunker = (rand() % 100);
+			int percfuel = (rand() % 100);
 			int fueltype = 1;
 			int bunkertype = rand() % 2 + 2;
 			y2 = y;
@@ -159,7 +159,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 				finaly = y-y2;
 			if(x>40 and x<= w.getSize().x - 40){
 				if(p == 0){
-					if (percfuel < 12) {
+					if (percfuel < 15) {
 						if (fuels > 0) {
 							f->fuel.settype(fueltype);
 							if (fueltype == 2)
@@ -179,7 +179,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft){
 							fuels--;
 						}
 					}
-					else if (percbunker < 12) {
+					else if (percbunker < 15) {
 						if (bunkers > 0) {
 							b->bunker.settype(bunkertype);
 							if (bunkertype == 2)

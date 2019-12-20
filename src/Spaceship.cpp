@@ -58,7 +58,7 @@ Spaceship::Spaceship()
 	fuel_bar.setFillColor(Color::Yellow);
 	fuel_bar.setPosition(406, 12.5);
 	move_left = move_up = move_right = move_down = shooting = false;
-	speed = 500;
+	speed = 600;
 	ratio = 1.0 / 3.0;
 	for_shooting = seconds(ratio);
 	fuel_bar_time = seconds(15);
@@ -68,7 +68,6 @@ Spaceship::Spaceship()
 void Spaceship::reset()
 {
 	move_left = move_up = move_right = move_down = shooting = false;
-	//ship.setPosition(300, 300);
 }
 
 
@@ -198,8 +197,7 @@ int Spaceship::move(RenderWindow& window)
 	if (move_left)
 		ship.setPosition(ship.getPosition().x - elapsed.asSeconds() * speed * coeff, ship.getPosition().y);
 	if (move_up)
-		ship.setPosition(ship.getPosition(
-		).x, ship.getPosition().y - elapsed.asSeconds() * speed * coeff);
+		ship.setPosition(ship.getPosition().x, ship.getPosition().y - elapsed.asSeconds() * speed * coeff);
 	if (move_right)
 		ship.setPosition(ship.getPosition().x + elapsed.asSeconds() * speed * coeff, ship.getPosition().y);
 	if (move_down)

@@ -18,7 +18,7 @@ double fRand(double fMin, double fMax)
 Bunker::Bunker()
 {
 	isdraw = false;
-	ratio = 1.0 / fRand(0.8, 2);
+	ratio = 1.0 / fRand(0.8, 2.1);
 	for_shooting = seconds(fRand(0, ratio));
 	rot = 0;
 	directions = NULL;
@@ -33,7 +33,7 @@ void Bunker::settype(int a)
 	type = a;
 	for (int i = 0; i < type; i++) {
 		directions[i] = fRand(-(3.0 / 4 * PI), -(1.0 / 4 * PI));
-		bullets_speed[i] = fRand(450, 750);
+		bullets_speed[i] = fRand(425, 775);
 	}
 }
 
@@ -48,8 +48,8 @@ void Bunker::rotate(double x)
 void Bunker::drawing()
 {
 	bunker.setFillColor(sf::Color::Blue);
-	bunker.setOutlineColor(Color(0, 0, 50));
-	bunker.setOutlineThickness(2);
+	bunker.setOutlineColor(Color(0, 0, 100));
+	bunker.setOutlineThickness(2.5);
 	bunker.setPointCount(20);
 	bunker.setOrigin(117.5, 154);
 	bunker.setPoint(0, sf::Vector2f(100, 100));
