@@ -19,7 +19,7 @@ Bullet::Bullet(double x, double y, bool left, bool up, bool right, bool down)
 	move_up = up;
 	move_right = right;
 	move_down = down;
-	speed = 800;
+	speed = 1000;
 	bullet.setPosition(x, y);
 	using_degrees = false;
 }

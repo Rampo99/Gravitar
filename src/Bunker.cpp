@@ -32,8 +32,8 @@ void Bunker::settype(int a)
 {
 	type = a;
 	for (int i = 0; i < type; i++) {
-		directions[i] = fRand(-(3.0 / 4 * PI), -(1.0 / 4 * PI));
-		bullets_speed[i] = fRand(425, 775);
+		directions[i] = fRand(-(4.0 / 5 * PI), -(1.0 / 5 * PI));
+		bullets_speed[i] = fRand(425, 825);
 	}
 }
 
