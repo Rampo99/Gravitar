@@ -19,7 +19,7 @@ int main()
 	int screen = 0;
 	ContextSettings settings;
 	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1600, 900), "Gravitar", Style::Fullscreen, settings);
+	RenderWindow window(VideoMode(1920, 1080), "Gravitar", Style::Fullscreen, settings);
 	window.setKeyRepeatEnabled(false);
 	window.setFramerateLimit(500);
 	window.setMouseCursorVisible(false);
@@ -61,25 +61,25 @@ int main()
 		}
 		if (screen == 4) {
 			solarsystem->alfacheck = false;
-			ship.setposition(300, 100);
+			ship.setposition(window.getSize().x / 2, window.getSize().y / 2 - 200);
 			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 5) {
 			solarsystem->betacheck = false;
-			ship.setposition(300, 100);
+			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 6) {
 			solarsystem->omegacheck = false;
-			ship.setposition(300, 100);
+			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
 			screen = 2;
 		}
 		if (screen == 7) {
 			solarsystem->gammacheck = false;
-			ship.setposition(300, 100);
+			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
 			screen = 2;
 		}

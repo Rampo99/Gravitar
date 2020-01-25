@@ -15,8 +15,8 @@ using namespace sf;
 Spaceship::Spaceship()
 {
 	ship = ConvexShape(16);
-	ship.setFillColor(Color::Green);
-	ship.setOutlineColor(Color::Magenta);
+	ship.setFillColor(Color::Blue);
+	ship.setOutlineColor(Color(0, 0, 100));
 	ship.setOutlineThickness(2);
 	ship.setPoint(0, Vector2f(0, 0));
 	ship.setPoint(1, Vector2f(5, 10));
@@ -38,8 +38,8 @@ Spaceship::Spaceship()
 	health = 5;
 	double l = 25;  // l lato quadrato cuore
 	heart = ConvexShape(8);
-	heart.setFillColor(Color::Red);
-	heart.setOutlineColor(Color(90, 0, 0));
+	heart.setFillColor(Color::Blue);
+	heart.setOutlineColor(Color(0, 0, 100));
 	heart.setOutlineThickness(2);
 	heart.setPoint(0, Vector2f((1.0 / 4) * l, 3));
 	heart.setPoint(1, Vector2f(0, (1.0 / 3) * l));
@@ -49,17 +49,17 @@ Spaceship::Spaceship()
 	heart.setPoint(5, Vector2f(l, (1.0 / 3) * l));
 	heart.setPoint(6, Vector2f((3.0 / 4) * l, 3));
 	heart.setPoint(7, Vector2f((1.0 / 2) * l, (1.0 / 3) * l));
-	fuel_border = RectangleShape(Vector2f(185.0, 25.0));
+	fuel_border = RectangleShape(Vector2f(305.0, 26.0));
 	fuel_border.setFillColor(Color::Black);
 	fuel_border.setOutlineColor(Color::Yellow);
 	fuel_border.setOutlineThickness(2);
-	fuel_border.setPosition(403.5, 10);
-	fuel_bar = RectangleShape(Vector2f(180.0, 20.0));
+	fuel_border.setPosition(1593.5, 13);
+	fuel_bar = RectangleShape(Vector2f(300.0, 21.0));
 	fuel_bar.setFillColor(Color::Yellow);
-	fuel_bar.setPosition(406, 12.5);
+	fuel_bar.setPosition(1596, 15.5);
 	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 600;
-	ratio = 1.0 / 3.0;
+	ratio = 1.0 / 2.0;
 	for_shooting = seconds(ratio);
 	fuel_bar_time = seconds(15);
 }
@@ -168,7 +168,7 @@ void Spaceship::shoot()
 	double x = ship.getPosition().x, y = ship.getPosition().y;
 	for_shooting += clock_canshoot.restart();
 	if (shooting && for_shooting.asSeconds() >= ratio) {
-		Bullet **tmp = new Bullet*;
+		Bullet *tmp;
 		if (move_left)
 			x -= 20;
 		if (move_up)
@@ -178,9 +178,9 @@ void Spaceship::shoot()
 		if (move_down)
 			y += 20;
 		if (!(move_left || move_up || move_right || move_down))
-			*tmp = new Bullet(x, y + 20, false, false, false, true);
+			tmp = new Bullet(x, y + 20, false, false, false, true);
 		else {
-			*tmp = new Bullet(x, y, move_left, move_up, move_right, move_down);
+			tmp = new Bullet(x, y, move_left, move_up, move_right, move_down);
 		}
 		bullets.push_front(*tmp);
 		for_shooting = clock_canshoot.restart();
@@ -222,34 +222,44 @@ int Spaceship::move(RenderWindow& window)
 
 void Spaceship::draw(RenderWindow& window)
 {
+	list<Bullet>::iterator it;
+	for(it = bullets.begin(); it != bullets.end(); ) {
+		it->move();
+		if (it->isAlive(window)) {
+			it->draw(window);
+			it++;
+		}
+		else
+			it = bullets.erase(it);
+	}
+
+	window.draw(ship);
+
 	for (int h = 0; h < health; h++) {
-		heart.setPosition(h * 25 + 10 + 10 * h, 7);
+		heart.setPosition(h * 25 + 10 + 10 * h, 9);
 		window.draw(heart);
 	}
 
 	window.draw(fuel_border);
-	double x = 180 * (fuel_bar_time.asSeconds() / 15);
+	double x = 300 * (fuel_bar_time.asSeconds() / 15);
 	x = x < 0 ? 0 : x;
 	fuel_bar.setSize(Vector2f(x, fuel_bar.getSize().y));
 	window.draw(fuel_bar);
-
-	list<Bullet*>::iterator it;
-	for(it = bullets.begin(); it != bullets.end(); ) {
-		(*it)->move();
-		if ((*it)->isAlive(window)) {
-			(*it)->draw(window);
-			it++;
-		}
-		else {
-			delete *it;
-			it = bullets.erase(it);
-		}
-	}
-
-	window.draw(ship);
 }
 
 
-void Spaceship::clearBullets() {
+void Spaceship::clearBullets()
+{
 	bullets.clear();
+}
+
+
+ConvexShape Spaceship::getShape()
+{
+	return ship;
+}
+
+void Spaceship::hit()
+{
+	health--;
 }

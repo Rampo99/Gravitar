@@ -13,7 +13,7 @@ using namespace sf;
 Bullet::Bullet(double x, double y, bool left, bool up, bool right, bool down)
 {
 	bullet = CircleShape(5);
-	bullet.setFillColor(Color::Red);
+	bullet.setFillColor(Color::Yellow);
 	bullet.setOrigin(5, 5);
 	move_left = left;
 	move_up = up;
@@ -28,7 +28,7 @@ Bullet::Bullet(double x, double y, bool left, bool up, bool right, bool down)
 Bullet::Bullet(double x, double y, double ang, double sp)
 {
 	bullet = CircleShape(5);
-	bullet.setFillColor(Color(200, 0, 255));
+	bullet.setFillColor(Color::Red);
 	bullet.setOrigin(5, 5);
 	bullet.setPosition(x, y);
 	using_degrees = true;
@@ -69,4 +69,10 @@ bool Bullet::isAlive(RenderWindow& window)
 void Bullet::draw(RenderWindow& window)
 {
 	window.draw(bullet);
+}
+
+
+CircleShape Bullet::getShape()
+{
+	return bullet;
 }

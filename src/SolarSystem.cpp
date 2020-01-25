@@ -13,24 +13,28 @@ SolarSystem::SolarSystem()
 void SolarSystem::setupPlanets()
 {
 	if (alfacheck) {
-		alfa.setRadius(20);
-		alfa.setOrigin(20, 20);
-		alfa.setPosition(100, 100);
+		alfa.setRadius(50);
+		alfa.setOrigin(50, 50);
+		alfa.setPosition(450, 300);
+		alfa.setFillColor(Color(25, 200, 80));
 	}
 	if (betacheck) {
-		beta.setRadius(20);
-		beta.setOrigin(20, 20);
-		beta.setPosition(100, 500);
+		beta.setRadius(50);
+		beta.setOrigin(50, 50);
+		beta.setPosition(450, 1080 - 300);
+		beta.setFillColor(Color(25, 200, 80));
 	}
 	if (gammacheck) {
-		gamma.setRadius(20);
-		gamma.setOrigin(20, 20);
-		gamma.setPosition(500, 100);
+		gamma.setRadius(50);
+		gamma.setOrigin(50, 50);
+		gamma.setPosition(1920 - 450, 300);
+		gamma.setFillColor(Color(25, 200, 80));
 	}
 	if (omegacheck) {
-		omega.setRadius(20);
-		omega.setOrigin(20, 20);
-		omega.setPosition(500, 500);
+		omega.setRadius(50);
+		omega.setOrigin(50, 50);
+		omega.setPosition(1920 - 450, 1080 - 300);
+		omega.setFillColor(Color(25, 200, 80));
 	}
 }
 
@@ -50,20 +54,20 @@ int SolarSystem::checkcollide()
 	 * 6 = gamma
 	 * 7 = omega */
 	if (alfacheck)
-		if ((ship.getx() >= alfa.getPosition().x - 30 && ship.getx() <= alfa.getPosition().x + 30) && (ship.gety() >= alfa.getPosition().y - 30 && ship.gety() <= alfa.getPosition().y + 30))
+		if ((ship.getx() >= alfa.getPosition().x - 55 && ship.getx() <= alfa.getPosition().x + 55) && (ship.gety() >= alfa.getPosition().y - 55 && ship.gety() <= alfa.getPosition().y + 55))
 			return 4;  // player enters alfa
 
 	if (betacheck)
-		if ((ship.getx() >= beta.getPosition().x - 30 && ship.getx() <= beta.getPosition().x + 30) && (ship.gety() >= beta.getPosition().y - 30 && ship.gety() <= beta.getPosition().y + 30))
+		if ((ship.getx() >= beta.getPosition().x - 55 && ship.getx() <= beta.getPosition().x + 55) && (ship.gety() >= beta.getPosition().y - 55 && ship.gety() <= beta.getPosition().y + 55))
 			return 5;  // player enters beta
 
 	if (omegacheck)
-		if((ship.getx() >= omega.getPosition().x - 30 && ship.getx() <= omega.getPosition().x + 30) && (ship.gety() >= omega.getPosition().y - 30 && ship.gety() <= omega.getPosition().y + 30))
+		if((ship.getx() >= omega.getPosition().x - 55 && ship.getx() <= omega.getPosition().x + 55) && (ship.gety() >= omega.getPosition().y - 55 && ship.gety() <= omega.getPosition().y + 55))
 			return 6;  // player enters omega
 
 	if (gammacheck)
-		if ((ship.getx() >= gamma.getPosition().x - 30 && ship.getx() <= gamma.getPosition().x + 30) && (ship.gety() >= gamma.getPosition().y - 30 && ship.gety() <= gamma.getPosition().y + 30))
-			return 7;  // plater enters gamma
+		if ((ship.getx() >= gamma.getPosition().x - 55 && ship.getx() <= gamma.getPosition().x + 55) && (ship.gety() >= gamma.getPosition().y - 55 && ship.gety() <= gamma.getPosition().y + 55))
+			return 7;  // player enters gamma
 
 	return 0; //0 = no collision
 }
@@ -77,9 +81,9 @@ int SolarSystem::Run(sf::RenderWindow &window)
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if(event.type == sf::Event::KeyPressed){
-				if(event.key.code == sf::Keyboard::Escape){
-					return 0;
+			if(event.type == sf::Event::KeyPressed) {
+				if(event.key.code == sf::Keyboard::Escape) {
+					window.close();
 				}
 			}
 			ship.direction(event);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Screen.h"
 #include <SFML/Graphics.hpp>
+#include "Spaceship.h"
 
 
 #ifndef MENU_H
@@ -15,7 +16,6 @@ public:
 	void setreturnint(int a);
 
 private:
-	bool gioco;
 	int returnint;
 
 };

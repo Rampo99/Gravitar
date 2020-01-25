@@ -17,11 +17,14 @@ public:
 	bool isdraw;
 	void drawing();
 	void rotate(double x);
+	bool isAlive();
+	void hit();
+	sf::ConvexShape getShape();
+	list<Bullet> bullets;
 
 private:
 	sf::ConvexShape bunker;
-	int health = 100;
-	list<Bullet*> bullets;
+	int health;
 	Time for_shooting;
 	Clock clock_canshoot;
 	double ratio, rot;

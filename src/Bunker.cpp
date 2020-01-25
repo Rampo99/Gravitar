@@ -17,11 +17,11 @@ double fRand(double fMin, double fMax)
 
 Bunker::Bunker()
 {
+	health = 3;
 	isdraw = false;
 	ratio = 1.0 / fRand(0.8, 2.1);
 	for_shooting = seconds(fRand(0, ratio));
 	rot = 0;
-	directions = NULL;
 	type = 0;
 	directions = new double[3];
 	bullets_speed = new double[3];
@@ -33,7 +33,7 @@ void Bunker::settype(int a)
 	type = a;
 	for (int i = 0; i < type; i++) {
 		directions[i] = fRand(-(4.0 / 5 * PI), -(1.0 / 5 * PI));
-		bullets_speed[i] = fRand(425, 825);
+		bullets_speed[i] = fRand(500, 950);
 	}
 }
 
@@ -47,11 +47,11 @@ void Bunker::rotate(double x)
 
 void Bunker::drawing()
 {
-	bunker.setFillColor(sf::Color::Blue);
-	bunker.setOutlineColor(Color(0, 0, 100));
+	bunker.setFillColor(sf::Color::Red);
+	bunker.setOutlineColor(Color(100, 0, 0));
 	bunker.setOutlineThickness(2.5);
 	bunker.setPointCount(20);
-	bunker.setOrigin(117.5, 154);
+	bunker.setOrigin(117.5, 156);
 	bunker.setPoint(0, sf::Vector2f(100, 100));
 	bunker.setPoint(1, sf::Vector2f(100, 125));
 	bunker.setPoint(2, sf::Vector2f(105, 125));
@@ -96,25 +96,42 @@ void Bunker::draw(sf::RenderWindow& window)
 	for_shooting += clock_canshoot.restart();
 	if (for_shooting.asSeconds() >= ratio) {
 		for (int i = 0; i < type; i++) {
-			Bullet **tmp = new Bullet*;
-			*tmp = new Bullet(x, y, directions[i], bullets_speed[i]);
+			Bullet *tmp = new Bullet(x, y, directions[i], bullets_speed[i]);
 			bullets.push_front(*tmp);
 			for_shooting = clock_canshoot.restart();
 		}
 	}
 
-	list<Bullet*>::iterator it;
+	list<Bullet>::iterator it;
 	for(it = bullets.begin(); it != bullets.end(); ) {
-		(*it)->move();
-		if ((*it)->isAlive(window)) {
-			(*it)->draw(window);
+		it->move();
+		if (it->isAlive(window)) {
+			it->draw(window);
 			it++;
 		}
-		else {
-			delete *it;
+		else
 			it = bullets.erase(it);
-		}
 	}
 
-	window.draw(bunker);
+	if (isAlive())
+		window.draw(bunker);
+	else
+		ratio = 999999999999;
+}
+
+
+bool Bunker::isAlive() {
+	return health > 0;
+}
+
+
+sf::ConvexShape Bunker::getShape()
+{
+	return bunker;
+}
+
+
+void Bunker::hit()
+{
+	health--;
 }

@@ -19,13 +19,12 @@ private:
 	bool move_left, move_up, move_right, move_down, shooting;
 	double speed, ratio;
 	int health;
-	list<Bullet*> bullets;
 	Clock clock_move, clock_canshoot, drain_fuel;
 	Time for_shooting, fuel_bar_time;
 
 public:
+	list<Bullet> bullets;
 	int score = 0;
-	int lifes = 3;
 	double fuellvl = 100;
 	//void increasefuel();
 	//void addlife();
@@ -42,6 +41,8 @@ public:
 	double getx();
 	double gety();
 	void clearBullets();
+	ConvexShape getShape();
+	void hit();
 
 };
 

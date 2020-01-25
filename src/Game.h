@@ -54,6 +54,7 @@ public:
 	void setnFuels(int n); //set number of fuels for current game
 	void terraforming(sf::RenderWindow& w, int rightorleft); //creates terrain in run-time
 	void draw(sf::RenderWindow& w);
+	void checkCollisions();
 	ptrlines Lines;
 	unsigned int x = 0,y = 0;
 	bool setup = true;
