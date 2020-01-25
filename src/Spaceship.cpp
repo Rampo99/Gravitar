@@ -63,7 +63,7 @@ Spaceship::Spaceship()
 	for_shooting = seconds(ratio);
 	fuel_bar_time = seconds(15);
 	raggioon = false;
-	raggio = RectangleShape(Vector2f(5, 1300));
+	raggio = RectangleShape(Vector2f(5, 300));
 	raggio.setOrigin(2.5, 0);
 	raggio.setFillColor(Color::Cyan);
 }
@@ -230,6 +230,11 @@ int Spaceship::move(RenderWindow& window)
 
 void Spaceship::draw(RenderWindow& window)
 {
+	if (raggioon) {
+		raggio.setPosition(ship.getPosition().x, ship.getPosition().y);
+		window.draw(raggio);
+	}
+
 	list<Bullet>::iterator it;
 	for(it = bullets.begin(); it != bullets.end(); ) {
 		it->move();
@@ -239,11 +244,6 @@ void Spaceship::draw(RenderWindow& window)
 		}
 		else
 			it = bullets.erase(it);
-	}
-
-	if (raggioon) {
-		raggio.setPosition(ship.getPosition().x, ship.getPosition().y);
-		window.draw(raggio);
 	}
 
 	window.draw(ship);
