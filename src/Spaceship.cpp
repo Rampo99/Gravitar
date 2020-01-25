@@ -62,6 +62,10 @@ Spaceship::Spaceship()
 	ratio = 1.0 / 2.0;
 	for_shooting = seconds(ratio);
 	fuel_bar_time = seconds(15);
+	raggioon = false;
+	raggio = RectangleShape(Vector2f(5, 1300));
+	raggio.setOrigin(2.5, 0);
+	raggio.setFillColor(Color::Cyan);
 }
 
 
@@ -142,6 +146,10 @@ void Spaceship::ifShooting(Event event)
 		shooting = true;
 	if (event.type == Event::KeyReleased && event.key.code == Keyboard::L)
 		shooting = false;
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::J)
+		raggioon = true;
+	if (event.type == Event::KeyReleased && event.key.code == Keyboard::J)
+		raggioon = false;
 }
 
 
@@ -231,6 +239,11 @@ void Spaceship::draw(RenderWindow& window)
 		}
 		else
 			it = bullets.erase(it);
+	}
+
+	if (raggioon) {
+		raggio.setPosition(ship.getPosition().x, ship.getPosition().y);
+		window.draw(raggio);
 	}
 
 	window.draw(ship);

@@ -15,8 +15,8 @@ class Spaceship {
 
 private:
 	ConvexShape ship, heart;
-	RectangleShape fuel_border, fuel_bar;
-	bool move_left, move_up, move_right, move_down, shooting;
+	RectangleShape fuel_border, fuel_bar, raggio;
+	bool move_left, move_up, move_right, move_down, shooting, raggioon;
 	double speed, ratio;
 	int health;
 	Clock clock_move, clock_canshoot, drain_fuel;
