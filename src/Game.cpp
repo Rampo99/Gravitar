@@ -276,7 +276,7 @@ void Game::checkCollisions()
 		b = b->next;
 	}
 
-	for (unsigned int i = 0; i < Lines->lines.getVertexCount() - 1; i++) {
+	/*for (unsigned int i = 0; i < Lines->lines.getVertexCount() - 1; i++) {
 		for (it = ship.bullets.begin(); it != ship.bullets.end(); it++) {
 			if ((it->getShape().getPosition().x >= Lines->lines[i].position.x) and (it->getShape().getPosition().x <= Lines->lines[i + 1].position.x)) {
 				VertexArray tmpline(sf::Lines, 2);
@@ -288,14 +288,6 @@ void Game::checkCollisions()
 			else
 				it++;
 		}
-	}
+	}*/
 
 }
-
-
-
-
-
-
-
-
