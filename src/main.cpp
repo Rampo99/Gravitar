@@ -40,7 +40,7 @@ int main()
 			menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
 		if (screen == 3) {
-			//ship.increasescore(20);
+			ship.increaseScore(50);
 			bunkers++;
 			fuels++;
 			delete game;
@@ -50,8 +50,7 @@ int main()
 			game->setnFuels(fuels);
 			Screens[2] = game;
 			if (solarsystem->check()) {
-				//ship.addlife();
-				//ship.increasescore(100);
+				ship.increaseScore(200);
 				delete solarsystem;
 				solarsystem = NULL;
 				solarsystem = new SolarSystem;

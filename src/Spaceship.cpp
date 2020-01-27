@@ -35,7 +35,7 @@ Spaceship::Spaceship()
 	ship.setPoint(14, Vector2f(20, 0));
 	ship.setPoint(15, Vector2f(10, 5));
 	ship.setOrigin(20, 20);
-	health = 5;
+	health = 6;
 	double l = 25;  // l lato quadrato cuore
 	heart = ConvexShape(8);
 	heart.setFillColor(Color::Blue);
@@ -60,12 +60,13 @@ Spaceship::Spaceship()
 	move_left = move_up = move_right = move_down = shooting = false;
 	speed = 600;
 	ratio = 1.0 / 2.0;
-	for_shooting = seconds(ratio);
-	fuel_bar_time = seconds(15);
+	for_shooting_time = seconds(ratio);
+	fuel_bar_time = seconds(20);
 	raggioon = false;
 	raggio = RectangleShape(Vector2f(5, 300));
 	raggio.setOrigin(2.5, 0);
 	raggio.setFillColor(Color::Cyan);
+	score = 0;
 }
 
 
@@ -134,9 +135,9 @@ void Spaceship::direction(Event event)
 				break;
 	}
 	if (move_left || move_right || move_up || move_down)
-		fuel_bar_time -= drain_fuel.restart();
+		fuel_bar_time -= drain_fuel_clock.restart();
 	else
-		drain_fuel.restart();
+		drain_fuel_clock.restart();
 }
 
 
@@ -146,9 +147,9 @@ void Spaceship::ifShooting(Event event)
 		shooting = true;
 	if (event.type == Event::KeyReleased && event.key.code == Keyboard::L)
 		shooting = false;
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::J)
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::K)
 		raggioon = true;
-	if (event.type == Event::KeyReleased && event.key.code == Keyboard::J)
+	if (event.type == Event::KeyReleased && event.key.code == Keyboard::K)
 		raggioon = false;
 }
 
@@ -174,8 +175,8 @@ double Spaceship::gety()
 void Spaceship::shoot()
 {
 	double x = ship.getPosition().x, y = ship.getPosition().y;
-	for_shooting += clock_canshoot.restart();
-	if (shooting && for_shooting.asSeconds() >= ratio) {
+	for_shooting_time += canshoot_clock.restart();
+	if (shooting && for_shooting_time.asSeconds() >= ratio) {
 		Bullet *tmp;
 		if (move_left)
 			x -= 20;
@@ -191,14 +192,14 @@ void Spaceship::shoot()
 			tmp = new Bullet(x, y, move_left, move_up, move_right, move_down);
 		}
 		bullets.push_front(*tmp);
-		for_shooting = clock_canshoot.restart();
+		for_shooting_time = canshoot_clock.restart();
 	}
 }
 
 
 int Spaceship::move(RenderWindow& window)
 {
-	Time elapsed = clock_move.restart();
+	Time elapsed = move_clock.restart();
 	double coeff = 1;
 	if ((move_up || move_down) && (move_left || move_right))
 		coeff = sin(45 * PI / 180);
@@ -230,6 +231,29 @@ int Spaceship::move(RenderWindow& window)
 
 void Spaceship::draw(RenderWindow& window)
 {
+	sf::Font font;
+	sf::Text number;
+	if (!font.loadFromFile("Consolas.ttf")) {
+		std::cerr << "Error loading font" << std::endl;
+		exit(-1);
+	}
+	number.setFont(font);
+	number.setCharacterSize(40);
+	number.setString(sf::String(std::to_string(score)));
+	number.setColor(Color::White);
+	number.setPosition(10, 35);
+	window.draw(number);
+
+	invulnerable_time -= invulnerable_clock.restart();
+	if (isVulnerable()) {
+		ship.setFillColor(Color::Blue);
+		ship.setOutlineColor(Color(0, 0, 100));
+	}
+	else {
+		ship.setFillColor(Color(0, 255, 255));
+		ship.setOutlineColor(Color(0, 100, 100));
+	}
+
 	if (raggioon) {
 		raggio.setPosition(ship.getPosition().x, ship.getPosition().y);
 		window.draw(raggio);
@@ -254,7 +278,7 @@ void Spaceship::draw(RenderWindow& window)
 	}
 
 	window.draw(fuel_border);
-	double x = 300 * (fuel_bar_time.asSeconds() / 15);
+	double x = 300 * (fuel_bar_time.asSeconds() / 20);
 	x = x < 0 ? 0 : x;
 	fuel_bar.setSize(Vector2f(x, fuel_bar.getSize().y));
 	window.draw(fuel_bar);
@@ -272,7 +296,40 @@ ConvexShape Spaceship::getShape()
 	return ship;
 }
 
+
 void Spaceship::hit()
 {
-	health--;
+	if (isVulnerable())
+		health--;
+}
+
+
+RectangleShape Spaceship::getRaggio()
+{
+	return raggio;
+}
+
+
+void Spaceship::addFuel()
+{
+	fuel_bar_time += seconds(5.5);
+	fuel_bar_time = fuel_bar_time.asSeconds() > 20.0 ? seconds(20.0) : fuel_bar_time;
+}
+
+
+void Spaceship::makeInvulnerable(double s)
+{
+	invulnerable_time = seconds(s);
+}
+
+
+bool Spaceship::isVulnerable()
+{
+	return invulnerable_time.asSeconds() <= 0;
+}
+
+
+void Spaceship::increaseScore(int a)
+{
+	score += a;
 }

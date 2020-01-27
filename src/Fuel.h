@@ -14,10 +14,13 @@ public:
 	void position(int x, int y);
 	void rotation(double x);
 	bool isdraw;
+	bool isAlive();
+	void hit();
+	sf::ConvexShape getShape();
 
 private:
 	sf::ConvexShape benza;
-	int value;
+	int value, health;
 
 };
 

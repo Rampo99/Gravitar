@@ -17,7 +17,7 @@ double fRand(double fMin, double fMax)
 
 Bunker::Bunker()
 {
-	health = 3;
+	health = 0;
 	isdraw = false;
 	ratio = 1.0 / fRand(0.8, 2.1);
 	for_shooting = seconds(fRand(0, ratio));
@@ -31,8 +31,9 @@ Bunker::Bunker()
 void Bunker::settype(int a)
 {
 	type = a;
+	health = type;
 	for (int i = 0; i < type; i++) {
-		directions[i] = fRand(-(4.0 / 5 * PI), -(1.0 / 5 * PI));
+		directions[i] = fRand(-(6.0 / 7 * PI), -(1.0 / 7 * PI));
 		bullets_speed[i] = fRand(500, 950);
 	}
 }
@@ -73,6 +74,15 @@ void Bunker::drawing()
 	bunker.setPoint(18, sf::Vector2f(105, 105));
 	bunker.setPoint(19, sf::Vector2f(105, 100));
 	isdraw = true;
+	double x = bunker.getPosition().x, y = bunker.getPosition().y - 50;
+	if (rot > 300) {
+		x -= 22;
+		y += 5;
+	}
+	else if (rot > 20) {
+		x += 22;
+		y += 5;
+	}
 }
 
 
@@ -85,14 +95,6 @@ void Bunker::position(int x, int y)
 void Bunker::draw(sf::RenderWindow& window)
 {
 	double x = bunker.getPosition().x, y = bunker.getPosition().y - 50;
-	if (rot > 300) {
-		x -= 22;
-		y += 5;
-	}
-	else if (rot > 20) {
-		x += 22;
-		y += 5;
-	}
 	for_shooting += clock_canshoot.restart();
 	if (for_shooting.asSeconds() >= ratio) {
 		for (int i = 0; i < type; i++) {

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
 #include <list>
+#include <string>
 
 
 using namespace std;
@@ -18,18 +19,14 @@ private:
 	RectangleShape fuel_border, fuel_bar, raggio;
 	bool move_left, move_up, move_right, move_down, shooting, raggioon;
 	double speed, ratio;
-	int health;
-	Clock clock_move, clock_canshoot, drain_fuel;
-	Time for_shooting, fuel_bar_time;
+	int health, score;
+	Clock move_clock, canshoot_clock, drain_fuel_clock, invulnerable_clock;
+	Time for_shooting_time, fuel_bar_time, invulnerable_time;
 
 public:
 	list<Bullet> bullets;
-	int score = 0;
 	double fuellvl = 100;
-	//void increasefuel();
-	//void addlife();
-	//void increasescore(int a);
-	//void removelife();
+	void increaseScore(int a);
 	Spaceship();
 	void setposition(double x, double y);
 	void direction(Event event);
@@ -43,6 +40,10 @@ public:
 	void clearBullets();
 	ConvexShape getShape();
 	void hit();
+	RectangleShape getRaggio();
+	void addFuel();
+	void makeInvulnerable(double s);
+	bool isVulnerable();
 
 };
 

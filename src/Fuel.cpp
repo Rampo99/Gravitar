@@ -5,6 +5,7 @@ Fuel::Fuel()
 {
 	value = 100;
 	isdraw = false;
+	health = 1;
 }
 
 
@@ -35,5 +36,23 @@ void Fuel::position(int x, int y)
 
 void Fuel::draw(sf::RenderWindow& w)
 {
-	w.draw(benza);
+	if (isAlive())
+		w.draw(benza);
+}
+
+
+bool Fuel::isAlive() {
+	return health > 0;
+}
+
+
+void Fuel::hit()
+{
+	health--;
+}
+
+
+sf::ConvexShape Fuel::getShape()
+{
+	return benza;
 }

@@ -13,18 +13,22 @@ Game::Game()
 	Lines->Bunkers = new BunkerList;
 	Lines->Fuels = new FuelList;
 	bunkers = 0;
+	bunkers_alive = 0;
 	fuels = 0;
 	sxpointer = Lines;
 	dxpointer = Lines;
 	fullview = false;
 	nothingtodraw = false;
 	singlescreen = false;
+	printmessage = true;
+	print_time = seconds(1.2);
 }
 
 
 void Game::setnBunkers(int n)
 {
 	bunkers = n;
+	bunkers_alive = n;
 }
 
 
@@ -45,11 +49,6 @@ int Game::Run(sf::RenderWindow &window)
 			if (event.type == Event::KeyPressed) {
 				if (event.key.code == Keyboard::Escape)
 					window.close();
-				if (event.key.code == Keyboard::K) {
-					ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
-					ship.clearBullets();
-					return 3;
-				}
 			}
 			ship.direction(event);
 			ship.ifShooting(event);
@@ -62,6 +61,11 @@ int Game::Run(sf::RenderWindow &window)
 		draw(window);
 		window.display();
 		checkCollisions();
+		if (bunkers_alive <= 0 and ship.gety() <= 0) {
+			ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
+			ship.clearBullets();
+			return 3;
+		}
 	}
 	return 0;
 }
@@ -228,6 +232,46 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 
 void Game::draw(sf::RenderWindow& w)
 {
+	sf::Font font1, font2;
+	sf::Text message, number;
+	if (!font1.loadFromFile("font.ttf")) {
+		std::cerr << "Error loading font" << std::endl;
+		exit(-1);
+	}
+	if (!font2.loadFromFile("Consolas.ttf")) {
+		std::cerr << "Error loading font" << std::endl;
+		exit(-1);
+	}
+	message.setFont(font1);
+	number.setFont(font2);
+	if (bunkers_alive == 0) {
+		print_time -= print_clock.restart();
+		if (print_time.asSeconds() <= 0) {
+			if (printmessage)
+				print_time = seconds(0.3);
+			else
+				print_time = seconds(1.2);
+			printmessage = !printmessage;
+		}
+		message.setCharacterSize(58);
+		message.setString("mission complete");
+		message.setColor(Color::White);
+		message.setPosition(615, 30);
+		if (printmessage)
+			w.draw(message);
+	}
+	else {
+		message.setCharacterSize(35);
+		message.setString("bunkers remaining");
+		message.setColor(Color::White);
+		message.setPosition(660, 4);
+		number.setCharacterSize(37);
+		number.setString(sf::String(std::to_string(bunkers_alive)));
+		number.setColor(Color::White);
+		number.setPosition(1140, 0);
+		w.draw(message);
+		w.draw(number);
+	}
 	ptrfuels f = Lines->Fuels;
 	ptrbunkers b = Lines->Bunkers;
 	while (f->fuel.isdraw) {
@@ -247,14 +291,18 @@ void Game::checkCollisions()
 	ptrbunkers b = Lines->Bunkers;
 	list<Bullet>::iterator it;
 
-	// ship colpisce bunker
+	// bullet di ship colpisce bunker
 	for(it = ship.bullets.begin(); it != ship.bullets.end(); ) {
 		b = Lines->Bunkers;
 		while (b->bunker.isdraw) {
 			if (b->bunker.isAlive()) {
-				if (b->bunker.getShape().getGlobalBounds().contains(it->getShape().getPosition())) {
+				if (b->bunker.getShape().getGlobalBounds().contains(Vector2f(it->getShape().getPosition().x, it->getShape().getPosition().y - 10))) {
 					b->bunker.hit();
 					it = ship.bullets.erase(it);
+					if (!b->bunker.isAlive()) {
+						decreaseBunkerAlive();
+						ship.increaseScore(10);
+					}
 				}
 			}
 			b = b->next;
@@ -266,8 +314,9 @@ void Game::checkCollisions()
 	b = Lines->Bunkers;
 	while (b->bunker.isdraw) {
 		for(it = b->bunker.bullets.begin(); it != b->bunker.bullets.end(); ) {
-			if (ship.getShape().getGlobalBounds().contains(it->getShape().getPosition())) {
+			if (ship.getShape().getGlobalBounds().contains(it->getShape().getPosition()) and ship.isVulnerable()) {
 				ship.hit();
+				ship.makeInvulnerable(1);
 				it = b->bunker.bullets.erase(it);
 			}
 			else
@@ -276,18 +325,51 @@ void Game::checkCollisions()
 		b = b->next;
 	}
 
-	/*for (unsigned int i = 0; i < Lines->lines.getVertexCount() - 1; i++) {
-		for (it = ship.bullets.begin(); it != ship.bullets.end(); it++) {
-			if ((it->getShape().getPosition().x >= Lines->lines[i].position.x) and (it->getShape().getPosition().x <= Lines->lines[i + 1].position.x)) {
-				VertexArray tmpline(sf::Lines, 2);
-				tmpline[0].position = Lines->lines[i].position;
-				tmpline[1].position = Lines->lines[i + 1].position;
-				if (tmpline.getBounds().contains(it->getShape().getPosition()))
+	// bullet colpiscono terreno
+	for (unsigned int i = 0; i < Lines->lines.getVertexCount() - 1; i++) {
+		for (it = ship.bullets.begin(); it != ship.bullets.end(); ) {
+			VertexArray tmpline(sf::Lines, 2);
+			tmpline[0].position = Lines->lines[i].position;
+			tmpline[1].position = Lines->lines[i + 1].position;
+			double m = (tmpline[0].position.y - tmpline[1].position.y) / (tmpline[0].position.x - tmpline[1].position.x);
+			if (it->getShape().getPosition().x >= tmpline[0].position.x and it->getShape().getPosition().x <= tmpline[1].position.x) {
+				if (it->getShape().getPosition().y >= m * (it->getShape().getPosition().x - tmpline[0].position.x) + tmpline[0].position.y - 3)
 					it = ship.bullets.erase(it);
+				else
+					it++;
 			}
 			else
 				it++;
 		}
-	}*/
+	}
 
+	// nave colpisce terreno
+	for (unsigned int i = 0; i < Lines->lines.getVertexCount() - 1; i++) {
+		VertexArray tmpline(sf::Lines, 2);
+		tmpline[0].position = Lines->lines[i].position;
+		tmpline[1].position = Lines->lines[i + 1].position;
+		double m = (tmpline[0].position.y - tmpline[1].position.y) / (tmpline[0].position.x - tmpline[1].position.x);
+		if (ship.getx() >= tmpline[0].position.x and ship.getx() <= tmpline[1].position.x) {
+			if (ship.gety() >= m * (ship.getx() - tmpline[0].position.x) + tmpline[0].position.y - 22) {
+				ship.hit();
+				ship.setposition(1920 / 2, 1080 / 2 - 200);
+				ship.makeInvulnerable(1);
+			}
+		}
+	}
+
+	// raggio prende fuel
+	ptrfuels f = Lines->Fuels;
+	while (f->fuel.isdraw) {
+		if (f->fuel.isAlive() and ship.getRaggio().getGlobalBounds().intersects(f->fuel.getShape().getGlobalBounds())) {
+			f->fuel.hit();
+			ship.addFuel();
+		}
+		f = f->next;
+	}
+}
+
+
+void Game::decreaseBunkerAlive() {
+	bunkers_alive--;
 }

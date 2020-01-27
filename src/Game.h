@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include <iostream>
 #include <list>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Bunker.h"
 #include "Fuel.h"
@@ -55,6 +56,7 @@ public:
 	void terraforming(sf::RenderWindow& w, int rightorleft); //creates terrain in run-time
 	void draw(sf::RenderWindow& w);
 	void checkCollisions();
+	void decreaseBunkerAlive();
 	ptrlines Lines;
 	unsigned int x = 0,y = 0;
 	bool setup = true;
@@ -64,9 +66,14 @@ private:
 	ptrlines dxpointer;
 	int bunkers;
 	int fuels;
+	int bunkers_alive;
 	bool fullview;
 	bool nothingtodraw;
 	bool singlescreen;
+	bool printmessage;
+	Time print_time;
+	Clock print_clock;
+
 };
 
 
