@@ -19,7 +19,7 @@ int main()
 	int screen = 0;
 	ContextSettings settings;
 	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1920, 1080), "Gravitar", Style::Fullscreen, settings);
+	RenderWindow window(VideoMode(1920, 1080), "nonGravitar", Style::Fullscreen, settings);
 	window.setKeyRepeatEnabled(false);
 	window.setFramerateLimit(500);
 	window.setMouseCursorVisible(false);

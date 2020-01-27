@@ -44,6 +44,7 @@ public:
 	void addFuel();
 	void makeInvulnerable(double s);
 	bool isVulnerable();
+	bool isAlive();
 
 };
 

@@ -231,18 +231,48 @@ int Spaceship::move(RenderWindow& window)
 
 void Spaceship::draw(RenderWindow& window)
 {
-	sf::Font font;
+	sf::Font font1;
 	sf::Text number;
-	if (!font.loadFromFile("Consolas.ttf")) {
+	if (!font1.loadFromFile("Consolas.ttf")) {
 		std::cerr << "Error loading font" << std::endl;
 		exit(-1);
 	}
-	number.setFont(font);
+	number.setFont(font1);
 	number.setCharacterSize(40);
 	number.setString(sf::String(std::to_string(score)));
 	number.setColor(Color::White);
 	number.setPosition(10, 35);
 	window.draw(number);
+
+	if(!isAlive()) {
+		while (window.isOpen()) {
+			sf::Event Event;
+			while (window.pollEvent(Event)) {
+				if (Event.type == sf::Event::Closed)
+					window.close();
+				if (Event.type == sf::Event::KeyPressed and Event.key.code == Keyboard::Escape)
+					window.close();
+			}
+			window.clear();
+			sf::Font font2;
+			sf::Text gameover;
+			if (!font2.loadFromFile("font.ttf")) {
+				std::cerr << "Error loading font" << std::endl;
+				exit(-1);
+			}
+			gameover.setFont(font2);
+			gameover.setCharacterSize(80);
+			gameover.setString("game over\nscore ");
+			gameover.setColor(Color::Red);
+			gameover.setPosition(660, 350);
+			number.setPosition(1060, 437);
+			number.setColor(Color::Red);
+			number.setCharacterSize(86);
+			window.draw(gameover);
+			window.draw(number);
+			window.display();
+		}
+	}
 
 	invulnerable_time -= invulnerable_clock.restart();
 	if (isVulnerable()) {
@@ -332,4 +362,10 @@ bool Spaceship::isVulnerable()
 void Spaceship::increaseScore(int a)
 {
 	score += a;
+}
+
+
+bool Spaceship::isAlive()
+{
+	return health > 0 and fuel_bar_time.asSeconds() > 0;
 }
