@@ -33,12 +33,10 @@ int main()
 	game->setnBunkers(bunkers);
 	game->setnFuels(fuels);
 	Screens.push_back(game);
+	//looping screens -- (menu, solarsystem, game)
 	while (screen >= 0) {
-		if (screen == 2)
-			menu.setreturnint(screen);
-		if (screen == 1)
-			menu.setreturnint(screen);
 		screen = Screens[screen]->Run(window);
+		//player completed planet -- deleting game screen
 		if (screen == 3) {
 			ship.increaseScore(50);
 			bunkers++;
@@ -49,6 +47,7 @@ int main()
 			game->setnBunkers(bunkers);
 			game->setnFuels(fuels);
 			Screens[2] = game;
+			//player completed entire solar -- creating new solarsystem
 			if (solarsystem->check()) {
 				ship.increaseScore(200);
 				delete solarsystem;
@@ -56,31 +55,35 @@ int main()
 				solarsystem = new SolarSystem;
 				Screens[1] = solarsystem;
 			}
-			screen = 1;
+			screen = 1; //send player to solar system
 		}
+		//player enters alfa
 		if (screen == 4) {
-			solarsystem->alfacheck = false;
+			solarsystem->alfacheck = false; //stop drawing alfa from solarsystem
 			ship.setposition(window.getSize().x / 2, window.getSize().y / 2 - 200);
 			ship.clearBullets();
-			screen = 2;
+			screen = 2; //send player to game screen
 		}
+		//player enters beta
 		if (screen == 5) {
-			solarsystem->betacheck = false;
+			solarsystem->betacheck = false; //stop drawing beta from solarsystem
 			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
-			screen = 2;
+			screen = 2; //send player to game screen
 		}
+		//player enters omega
 		if (screen == 6) {
-			solarsystem->omegacheck = false;
+			solarsystem->omegacheck = false; //stop drawing omega from solarsystem
 			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
-			screen = 2;
+			screen = 2; //send player to game screen
 		}
+		//player enters gamma
 		if (screen == 7) {
-			solarsystem->gammacheck = false;
+			solarsystem->gammacheck = false; //stop drawing gamma from solarsystem
 			ship.setposition(window.getSize().x / 2, window.getSize().y / 2  - 200);
 			ship.clearBullets();
-			screen = 2;
+			screen = 2; //send player to game screen
 		}
 	}
 }

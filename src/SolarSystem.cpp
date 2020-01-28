@@ -47,7 +47,7 @@ bool SolarSystem::check()
 
 int SolarSystem::checkcollide()
 {
-	/* Return int value based on which planet is joined.
+	/* Return int value based on which planet is visited.
 	 * 0 = no planet (so no collision)
 	 * 4 = alfa
 	 * 5 = beta

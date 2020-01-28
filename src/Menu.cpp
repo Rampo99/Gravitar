@@ -1,17 +1,7 @@
 #include "Menu.h"
 
 
-Menu::Menu(void)
-{
-	returnint = 1;
-}
-
-
-void Menu::setreturnint(int a)
-{
-	returnint = a;
-}
-
+Menu::Menu(void){}
 
 int Menu::Run(sf::RenderWindow &App)
 {
@@ -52,11 +42,8 @@ int Menu::Run(sf::RenderWindow &App)
 					menu = 1;
 					break;
 				case sf::Keyboard::Enter:
-					if (menu == 0) {
-						return (returnint);
-					}
-					else
-						return (-1);
+					if (menu == 0) return 1;
+					else App.close();
 					break;
 				default:
 					break;
