@@ -147,7 +147,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 					if (Lines->next == NULL)
 						Lines->lines.append(sf::Vertex(sf::Vector2f(x,sxpointer->lines[0].position.y), sf::Color::Green));
 					else
-						Lines->lines[0].position.y = dxpointer->lines[14].position.y;
+						Lines->lines[0].position.y = dxpointer->lines[w.getSize().x/40-1].position.y;
 				}
 			}
 			else
