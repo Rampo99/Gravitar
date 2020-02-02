@@ -142,26 +142,27 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 				x += 39;
 				if (Lines->next != NULL)
 					Lines->lines.append(sf::Vertex(sf::Vector2f(x,Lines->next->lines[0].position.y), sf::Color::Green));
-				if (nothingtodraw) {
+				else
+					Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Green));
+				if(nothingtodraw){
 					lastlinecheck = false;
 					if (Lines->next == NULL)
-						Lines->lines.append(sf::Vertex(sf::Vector2f(x,sxpointer->lines[0].position.y), sf::Color::Green));
+						Lines->lines[w.getSize().x/20-1].position.y = sxpointer->lines[0].position.y;
 					else
-						Lines->lines[0].position.y = dxpointer->lines[w.getSize().x/40-1].position.y;
+						Lines->lines[0].position.y = dxpointer->lines[w.getSize().x/20-1].position.y;
 				}
+
 			}
-			else
-				x += 40;
+			else x += 40;
 			if (y != w.getSize().y - 20) {
 				if (perclines < 30) {
 					if (y > 20)
 						y -= 20;
 				}
-				else if (perclines >= 30 && perclines < 60)
+				else if (perclines >= 30 && perclines < 50)
 					y += 20;
 			}
-			else
-				y -= 20;
+			else y -= 20;
 			if (lastlinecheck)
 				Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Green));
 			if (y - y2 < 0)
