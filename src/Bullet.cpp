@@ -25,10 +25,13 @@ Bullet::Bullet(double x, double y, bool left, bool up, bool right, bool down)
 }
 
 
-Bullet::Bullet(double x, double y, double ang, double sp)
+Bullet::Bullet(double x, double y, double ang, double sp, int type)
 {
 	bullet = CircleShape(5);
-	bullet.setFillColor(Color::Red);
+	if (type == 3)
+		bullet.setFillColor(Color::Red);
+	else
+		bullet.setFillColor(Color(200, 0, 200));
 	bullet.setOrigin(5, 5);
 	bullet.setPosition(x, y);
 	using_degrees = true;

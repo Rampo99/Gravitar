@@ -48,8 +48,14 @@ void Bunker::rotate(double x)
 
 void Bunker::drawing()
 {
-	bunker.setFillColor(sf::Color::Red);
-	bunker.setOutlineColor(Color(100, 0, 0));
+	if (type == 3) {
+		bunker.setFillColor(sf::Color::Red);
+		bunker.setOutlineColor(Color(100, 0, 0));
+	}
+	else {
+		bunker.setFillColor(sf::Color(200, 0, 200));
+		bunker.setOutlineColor(Color(100, 0, 100));
+	}
 	bunker.setOutlineThickness(2.5);
 	bunker.setPointCount(20);
 	bunker.setOrigin(117.5, 156);
@@ -98,7 +104,7 @@ void Bunker::draw(sf::RenderWindow& window)
 	for_shooting += clock_canshoot.restart();
 	if (for_shooting.asSeconds() >= ratio) {
 		for (int i = 0; i < type; i++) {
-			Bullet *tmp = new Bullet(x, y, directions[i], bullets_speed[i]);
+			Bullet *tmp = new Bullet(x, y, directions[i], bullets_speed[i], type);
 			bullets.push_front(*tmp);
 			for_shooting = clock_canshoot.restart();
 		}

@@ -19,7 +19,7 @@ private:
 
 public:
 	Bullet(double x, double y, bool left, bool up, bool right, bool down);
-	Bullet(double x, double y, double ang, double sp);
+	Bullet(double x, double y, double ang, double sp, int type);
 	void move();
 	bool isAlive(RenderWindow& window);
 	void draw(RenderWindow& window);
