@@ -41,7 +41,7 @@ public:
 	ConvexShape getShape();
 	void hit();
 	RectangleShape getRaggio();
-	void addFuel();
+	void addFuel(int type);
 	void makeInvulnerable(double s);
 	bool isVulnerable();
 	bool isAlive();

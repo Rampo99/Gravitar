@@ -135,7 +135,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 			int perclines = (rand() % 100) + 1;
 			int percbunker = (rand() % 100);
 			int percfuel = (rand() % 100);
-			int fueltype = 1;
+			int fueltype = rand() % 2;
 			int bunkertype = rand() % 2 + 2;
 			y2 = y;
 			if (x == w.getSize().x - 40) {
@@ -364,10 +364,7 @@ void Game::checkCollisions()
 	while (f->fuel.isdraw) {
 		if (f->fuel.isAlive() and ship.getRaggio().getGlobalBounds().intersects(f->fuel.getShape().getGlobalBounds())) {
 			f->fuel.hit();
-			if (f->fuel.getType() == 1)
-				ship.addFuel();
-			else  // ship.getType() == 2
-				ship.addFuel();
+			ship.addFuel(f->fuel.getType());
 		}
 		f = f->next;
 	}

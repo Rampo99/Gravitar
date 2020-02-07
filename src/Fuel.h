@@ -21,7 +21,7 @@ public:
 
 private:
 	sf::ConvexShape benza;
-	int value, health;
+	int value, health, type;
 
 };
 
