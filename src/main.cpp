@@ -33,7 +33,7 @@ int main()
 	game->setnBunkers(bunkers);
 	game->setnFuels(fuels);
 	Screens.push_back(game);
-	//looping screens -- (menu, solarsystem, game)
+	//looping screens -- (menu screen = 0, solarsystem screen=1, game screen=2)
 	while (screen >= 0) {
 		screen = Screens[screen]->Run(window);
 		//player completed planet -- deleting game screen
