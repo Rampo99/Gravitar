@@ -11,7 +11,10 @@ Fuel::Fuel()
 
 void Fuel::settype(int a)
 {
-	benza.setFillColor(sf::Color::Blue);
+	if (type == 1)
+		benza.setFillColor(sf::Color::Blue);
+	else  // type == 2
+		benza.setFillColor(sf::Color(255, 165, 0));
 	benza.setPointCount(4);
 	benza.setOrigin(15, 30);
 	benza.setPoint(0, sf::Vector2f(0, 0));
@@ -55,4 +58,10 @@ void Fuel::hit()
 sf::ConvexShape Fuel::getShape()
 {
 	return benza;
+}
+
+
+int Fuel::getType()
+{
+	return type;
 }

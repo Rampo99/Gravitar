@@ -364,7 +364,10 @@ void Game::checkCollisions()
 	while (f->fuel.isdraw) {
 		if (f->fuel.isAlive() and ship.getRaggio().getGlobalBounds().intersects(f->fuel.getShape().getGlobalBounds())) {
 			f->fuel.hit();
-			ship.addFuel();
+			if (f->fuel.getType() == 1)
+				ship.addFuel();
+			else  // ship.getType() == 2
+				ship.addFuel();
 		}
 		f = f->next;
 	}

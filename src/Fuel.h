@@ -17,6 +17,7 @@ public:
 	bool isAlive();
 	void hit();
 	sf::ConvexShape getShape();
+	int getType();
 
 private:
 	sf::ConvexShape benza;
