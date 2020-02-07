@@ -343,9 +343,9 @@ RectangleShape Spaceship::getRaggio()
 void Spaceship::addFuel(int type)
 {
 	if (type)
-		fuel_bar_time += seconds(6);
+		fuel_bar_time += seconds(6.5);
 	else  // type == 0
-		fuel_bar_time += seconds(4);
+		fuel_bar_time += seconds(4.5);
 	fuel_bar_time = fuel_bar_time.asSeconds() > 20.0 ? seconds(20.0) : fuel_bar_time;
 }
 
