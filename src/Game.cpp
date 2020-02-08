@@ -353,8 +353,10 @@ void Game::checkCollisions()
 		if (ship.getx() >= tmpline[0].position.x and ship.getx() <= tmpline[1].position.x) {
 			if (ship.gety() >= m * (ship.getx() - tmpline[0].position.x) + tmpline[0].position.y - 22) {
 				ship.hit();
-				ship.setposition(1920 / 2, 1080 / 2 - 200);
-				ship.makeInvulnerable(1);
+				if (ship.isVulnerable()) {
+					ship.setposition(1920 / 2, 1080 / 2 - 200);
+					ship.makeInvulnerable(1);
+				}
 			}
 		}
 	}
