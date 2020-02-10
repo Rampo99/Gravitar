@@ -1,40 +1,47 @@
 #include "SolarSystem.h"
 
 
-SolarSystem::SolarSystem()
+SolarSystem::SolarSystem(int n)
 {
 	sf::CircleShape alfa;
 	sf::CircleShape beta;
 	sf::CircleShape gamma;
 	sf::CircleShape omega;
+	what_s_s = n;
 }
 
 
 void SolarSystem::setupPlanets()
 {
+	Color colors[4];
+	colors[0] = Color(25, 200, 80);
+	colors[1] = Color(200, 80, 25);
+	colors[2] = Color(80, 25, 200);
+	colors[3] = Color(255, 100, 255);
+	int i = what_s_s % 4;  // 4 lunghezza array colors
 	if (alfacheck) {
 		alfa.setRadius(50);
 		alfa.setOrigin(50, 50);
 		alfa.setPosition(450, 300);
-		alfa.setFillColor(Color(25, 200, 80));
+		alfa.setFillColor(colors[i]);
 	}
 	if (betacheck) {
 		beta.setRadius(50);
 		beta.setOrigin(50, 50);
 		beta.setPosition(450, 1080 - 300);
-		beta.setFillColor(Color(25, 200, 80));
+		beta.setFillColor(colors[i]);
 	}
 	if (gammacheck) {
 		gamma.setRadius(50);
 		gamma.setOrigin(50, 50);
 		gamma.setPosition(1920 - 450, 300);
-		gamma.setFillColor(Color(25, 200, 80));
+		gamma.setFillColor(colors[i]);
 	}
 	if (omegacheck) {
 		omega.setRadius(50);
 		omega.setOrigin(50, 50);
 		omega.setPosition(1920 - 450, 1080 - 300);
-		omega.setFillColor(Color(25, 200, 80));
+		omega.setFillColor(colors[i]);
 	}
 }
 

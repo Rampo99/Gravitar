@@ -29,12 +29,13 @@ int main()
 void start_game()
 {
 	ship = Spaceship();
+	int n = 0;  // numero solar system
 	std::vector<Screen*> Screens;
 	int screen = 0;
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
-	SolarSystem* solarsystem = new SolarSystem;
+	SolarSystem* solarsystem = new SolarSystem(n);
 	Screens.push_back(solarsystem);
 	int bunkers = 2, fuels = 1;
 	Game* game = new Game;
@@ -58,9 +59,10 @@ void start_game()
 			//player completed entire solar -- creating new solarsystem
 			if (solarsystem->check()) {
 				ship.increaseScore(200);
+				n++;
 				delete solarsystem;
 				solarsystem = NULL;
-				solarsystem = new SolarSystem;
+				solarsystem = new SolarSystem(n);
 				Screens[1] = solarsystem;
 			}
 			screen = 1; //send player to solar system

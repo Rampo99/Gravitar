@@ -13,7 +13,7 @@
 class SolarSystem : public Screen {
 
 public:
-	SolarSystem();
+	SolarSystem(int n);
 	virtual int Run(sf::RenderWindow &App);
 	void setupPlanets();  // setup solarsystem planets (solarsystem view)
 	int checkcollide();  // checks if spaceship collides a planet
@@ -28,6 +28,7 @@ private:
 	sf::CircleShape beta;
 	sf::CircleShape gamma;
 	sf::CircleShape omega;
+	int what_s_s;
 	list<Bullet*> bullets;
 	list<Bullet*>::iterator it;
 
