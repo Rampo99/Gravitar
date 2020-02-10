@@ -12,6 +12,9 @@ using namespace std;
 using namespace sf;
 
 
+void start_game();
+
+
 Spaceship::Spaceship()
 {
 	ship = ConvexShape(16);
@@ -252,6 +255,8 @@ void Spaceship::draw(RenderWindow& window)
 					window.close();
 				if (Event.type == sf::Event::KeyPressed and Event.key.code == Keyboard::Escape)
 					window.close();
+				if (Event.type == sf::Event::KeyPressed and Event.key.code == Keyboard::Enter)
+					start_game();
 			}
 			window.clear();
 			sf::Font font2;

@@ -10,19 +10,27 @@ using namespace sf;
 
 
 Spaceship ship;
+RenderWindow window	(VideoMode(1920, 1080), "nonGravitar", Style::Fullscreen);
+void start_game();
 
 
 int main()
 {
 	srand(time(0));
-	std::vector<Screen*> Screens;
-	int screen = 0;
-	ContextSettings settings;
-	settings.antialiasingLevel = 16;
-	RenderWindow window(VideoMode(1920, 1080), "nonGravitar", Style::Fullscreen, settings);
 	window.setKeyRepeatEnabled(false);
 	window.setFramerateLimit(500);
 	window.setMouseCursorVisible(false);
+	start_game();
+	//ContextSettings settings;
+	//settings.antialiasingLevel = 16;
+}
+
+
+void start_game()
+{
+	ship = Spaceship();
+	std::vector<Screen*> Screens;
+	int screen = 0;
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
@@ -87,3 +95,4 @@ int main()
 		}
 	}
 }
+
