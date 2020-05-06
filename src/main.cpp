@@ -21,8 +21,6 @@ int main()
 	window.setFramerateLimit(500);
 	window.setMouseCursorVisible(false);
 	start_game();
-	//ContextSettings settings;
-	//settings.antialiasingLevel = 16;
 }
 
 
