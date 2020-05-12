@@ -311,26 +311,7 @@ void Game::checkCollisions()
 		}
 		b = b->next;
 	}
-	/*
-	for(it = ship.bullets.begin(); it != ship.bullets.end(); ) {
-		b = Lines->Bunkers;
-		b->bunker.test();
-		while (b->bunker.isdraw) {
-			if (b->bunker.isAlive()) {
-				if (b->bunker.getShape().getGlobalBounds().contains(Vector2f(it->getShape().getPosition().x, it->getShape().getPosition().y - 10))) {
-					b->bunker.hit();
-					it = ship.bullets.erase(it);
-					if (!b->bunker.isAlive()) {
-						decreaseBunkerAlive();
-						ship.increaseScore(10);
-					}
-				}
-			}
-			b = b->next;
-		}
-		it++;
-	}
-	 */
+
 	// ship viene colpita
 	b = Lines->Bunkers;
 	while (b->bunker.isdraw) {
