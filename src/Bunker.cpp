@@ -9,6 +9,7 @@
 
 
 double fRand(double fMin, double fMax)
+// restituisce un reale compreso tra fMin e fMax
 {
 	double f = (double)rand() / RAND_MAX;
 	return fMin + f * (fMax - fMin);
