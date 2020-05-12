@@ -136,7 +136,7 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 			int percbunker = (rand() % 100);
 			int percfuel = (rand() % 100);
 			int fueltype = rand() % 2;
-			int bunkertype = rand() % 2 + 2;
+			int bunkertype = rand() % 2+2;
 			y2 = y;
 			if (x == w.getSize().x - 40) {
 				x += 39;
@@ -154,15 +154,17 @@ void Game::terraforming(sf::RenderWindow& w, int rightorleft) {
 
 			}
 			else x += 40;
-			if (y != w.getSize().y - 20) {
-				if (perclines < 30) {
-					if (y > 20)
-						y -= 20;
+			if(y >= w.getSize().y - 300){
+				if (y != w.getSize().y - 20) {
+					if (perclines < 30) {
+						if (y > 20)
+							y -= 20;
+					}
+					else if (perclines >= 30 && perclines < 60)
+						y += 20;
 				}
-				else if (perclines >= 30 && perclines < 50)
-					y += 20;
-			}
-			else y -= 20;
+				else y -= 20;
+			} else y +=20;
 			if (lastlinecheck)
 				Lines->lines.append(sf::Vertex(sf::Vector2f(x,y), sf::Color::Green));
 			if (y - y2 < 0)
@@ -293,8 +295,26 @@ void Game::checkCollisions()
 	list<Bullet>::iterator it;
 
 	// bullet di ship colpisce bunker
+	while (b->bunker.isdraw) {
+		for(it = ship.bullets.begin(); it != ship.bullets.end(); ) {
+			if (b->bunker.isAlive()) {
+				if (b->bunker.getShape().getGlobalBounds().contains(Vector2f(it->getShape().getPosition().x, it->getShape().getPosition().y - 10))) {
+					b->bunker.hit();
+					it = ship.bullets.erase(it);
+					if (!b->bunker.isAlive()) {
+						decreaseBunkerAlive();
+						ship.increaseScore(10);
+					}
+				}
+			}
+			it++;
+		}
+		b = b->next;
+	}
+	/*
 	for(it = ship.bullets.begin(); it != ship.bullets.end(); ) {
 		b = Lines->Bunkers;
+		b->bunker.test();
 		while (b->bunker.isdraw) {
 			if (b->bunker.isAlive()) {
 				if (b->bunker.getShape().getGlobalBounds().contains(Vector2f(it->getShape().getPosition().x, it->getShape().getPosition().y - 10))) {
@@ -310,7 +330,7 @@ void Game::checkCollisions()
 		}
 		it++;
 	}
-
+	 */
 	// ship viene colpita
 	b = Lines->Bunkers;
 	while (b->bunker.isdraw) {

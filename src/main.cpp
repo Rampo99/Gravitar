@@ -21,6 +21,7 @@ int main()
 	window.setFramerateLimit(500);
 	window.setMouseCursorVisible(false);
 	start_game();
+
 }
 
 

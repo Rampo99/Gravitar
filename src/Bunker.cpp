@@ -9,6 +9,7 @@
 
 
 double fRand(double fMin, double fMax)
+// restituisce un reale compreso tra fMin e fMax
 {
 	double f = (double)rand() / RAND_MAX;
 	return fMin + f * (fMax - fMin);
@@ -48,7 +49,7 @@ void Bunker::rotate(double x)
 
 void Bunker::drawing()
 {
-	if (type == 3) {
+	if (type == 1) {
 		bunker.setFillColor(sf::Color::Red);
 		bunker.setOutlineColor(Color(100, 0, 0));
 	}
@@ -97,7 +98,6 @@ void Bunker::position(int x, int y)
 	bunker.setPosition(x,y);
 }
 
-
 void Bunker::draw(sf::RenderWindow& window)
 {
 	double x = bunker.getPosition().x, y = bunker.getPosition().y - 50;
@@ -125,6 +125,7 @@ void Bunker::draw(sf::RenderWindow& window)
 		window.draw(bunker);
 	else
 		ratio = 999999999999;
+
 }
 
 
