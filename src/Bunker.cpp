@@ -49,7 +49,7 @@ void Bunker::rotate(double x)
 
 void Bunker::drawing()
 {
-	if (type == 1) {
+	if (type == 3) {
 		bunker.setFillColor(sf::Color::Red);
 		bunker.setOutlineColor(Color(100, 0, 0));
 	}
