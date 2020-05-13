@@ -1,6 +1,6 @@
 # Non Gravitar
 
-Non Gravitar è un videogioco svilupato in c++ utilizzando la libreria grafica sfml.
+Non Gravitar è un videogioco sviluppato in c++ utilizzando la libreria grafica sfml.
 
   - Esplora infiniti sistemi solari generati a run time
   - Conquista l'intero universo distruggendo le difese dei pianeti
