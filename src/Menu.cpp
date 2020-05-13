@@ -1,7 +1,8 @@
 #include "Menu.h"
 
 
-Menu::Menu(void){}
+Menu::Menu(void) {}
+
 
 int Menu::Run(sf::RenderWindow &App)
 {

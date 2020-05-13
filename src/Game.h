@@ -51,14 +51,14 @@ class Game : public Screen{
 public:
 	Game();
 	virtual int Run(sf::RenderWindow &App);
-	void setnBunkers(int n); //set number of bunkers for current game
-	void setnFuels(int n); //set number of fuels for current game
-	void terraforming(sf::RenderWindow& w, int rightorleft); //creates terrain in run-time
+	void setnBunkers(int n);  // set number of bunkers for current game
+	void setnFuels(int n);  // set number of fuels for current game
+	void terraforming(sf::RenderWindow& w, int rightorleft);  // creates terrain in run-time
 	void draw(sf::RenderWindow& w);
 	void checkCollisions();
 	void decreaseBunkerAlive();
 	ptrlines Lines;
-	unsigned int x = 0,y = 0;
+	unsigned int x = 0, y = 0;
 	bool setup = true;
 
 private:

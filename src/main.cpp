@@ -10,7 +10,7 @@ using namespace sf;
 
 
 Spaceship ship;
-RenderWindow window	(VideoMode(1920, 1080), "nonGravitar", Style::Fullscreen);
+RenderWindow window(VideoMode(1920, 1080), "nonGravitar", Style::Fullscreen);
 void start_game();
 
 
@@ -34,14 +34,14 @@ void start_game()
 	ship.setposition(window.getSize().x / 2, window.getSize().y / 2);
 	Menu menu;
 	Screens.push_back(&menu);
-	SolarSystem* solarsystem = new SolarSystem(n);
+	SolarSystem *solarsystem = new SolarSystem(n);
 	Screens.push_back(solarsystem);
 	int bunkers = 2, fuels = 1;
-	Game* game = new Game;
+	Game *game = new Game;
 	game->setnBunkers(bunkers);
 	game->setnFuels(fuels);
 	Screens.push_back(game);
-	//looping screens -- (menu screen = 0, solarsystem screen=1, game screen=2)
+	// looping screens -- (menu screen = 0, solarsystem screen = 1, game screen = 2)
 	while (screen >= 0) {
 		screen = Screens[screen]->Run(window);
 		//player completed planet -- deleting game screen
@@ -96,4 +96,3 @@ void start_game()
 		}
 	}
 }
-
