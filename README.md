@@ -1,21 +1,21 @@
 # Non Gravitar
 
-Non Gravitar è un videogioco sviluppato in c++ utilizzando la libreria grafica sfml.
+Non Gravitar is an arcade game written with c++ using sfml graphic library.
 
-  - Esplora infiniti sistemi solari generati a run time
-  - Conquista l'intero universo distruggendo le difese dei pianeti
-  - Cerca di ottenere lo score più alto e confrontalo con i tuoi amici
+  - Explore unlimited solar system run time generated
+  - Conquer whole universe by destroying planets' defenses
+  - Try to get the highest score and compare it with your friends
 
-# Comandi
+# Help
 
-  - Muovi la tua navicella utilizzando WASD
-  - Spara con L
-  - Usa il raggio traente per rifornirti di benzina con K 
+  - Move your spaceship using WASD
+  - Fire with L
+  - Use the tractor beam to refuel with K
   
 # License
-Questo videogioco non è sotto nessuna licenza, tuttavia se volete utilizzare parti del codice sarebbe gradito ottenere i crediti.
+This video game is not under any license, however if you want to use parts of the code it would be nice to get credits.
 
-# Contribuenti
+# Contributors
 - [Lorenzo Ramponi](https://github.com/Rampo99)
 - [Daniel Maura](https://github.com/6SNAK36)
 - [Filippo Perrina](https://github.com/Perghio)
